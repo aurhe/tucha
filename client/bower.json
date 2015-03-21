@@ -1,0 +1,8 @@
+{
+	"name": "tucha",
+	"private": true,
+	"dependencies": {
+		"bootstrap-sass-official": "~3.2.0",
+		"bootstrap-table": "~1.6.0"
+	}
+}

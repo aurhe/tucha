@@ -1,0 +1,44 @@
+<h2>Perfil do animal</h2>
+
+<form id="animal" class="form-horizontal" method="post">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Nome</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" name="name" placeholder="Nome">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="species" class="col-sm-2 control-label">Espécie</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="species" name="species" placeholder="Espécie">
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="gender" class="col-sm-2 control-label">Sexo</label>
+        <div class="col-sm-2 radio">
+            <label><input type="radio" name="gender" id="male" value="0" checked>Macho</label>
+      </div>
+      <div class="col-sm-2 radio">
+            <label><input type="radio" name="gender" id="female" value="1">Fêmea</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="breed" class="col-sm-2 control-label">Raça</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="breed" name="breed" placeholder="Raça">
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="details" class="col-sm-2 control-label">Detalhes</label>
+        <div class="col-sm-10">
+            <textarea id="details" name="details" class="form-control" rows="3" placeholder="Detalhes"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Gravar</button>
+            <a class="btn btn-default" href="#animals" role="button">Cancelar</a>
+      </div>
+    </div>
+</form>
