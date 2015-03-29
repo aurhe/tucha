@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var urlencodedParser = bodyParser.urlencoded({
     extended: false
-})
+});
 
 var mysql = require('mysql');
 
@@ -32,13 +32,13 @@ app.use(express.static('public'));
 
 //rest
 app.get('/r/animals', function(req, res) {
-    connection.query('select * from tucha.animal', function(err, rows, fields) {
+    connection.query('select * from tucha.animal', function(err, rows) {
         res.json(rows);
     });
 });
 
 app.get('/r/animal/:id', function(req, res) {
-    connection.query('select * from tucha.animal where id=' + req.params.id, function(err, rows, fields) {
+    connection.query('select * from tucha.animal where id=' + req.params.id, function(err, rows) {
         res.json(rows[0]);
     });
 });
@@ -49,10 +49,10 @@ app.post('/r/animal/:id', urlencodedParser, function(req, res) {
 
     for (var i = keys.length - 1; i > 0; i--) {
         sql += keys[i] + '=\'' + req.body[keys[i]] + '\', ';
-    };
+    }
     sql += keys[0] + '=\'' + req.body[keys[0]] + '\' where id=' + req.params.id;
 
-    connection.query(sql, function(err, rows, fields) {
+    connection.query(sql, function(err, rows) {
         res.redirect('/#/animals');
     });
 });
