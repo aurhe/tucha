@@ -6,12 +6,24 @@ var cellFormatters = {
         return '<a class="btn btn-primary" href="#animal/' + value + '" role="button">' +
             '<i class="glyphicon glyphicon-pencil"></i> Editar</a>';
     },
+    thumbnailHtml: function() {
+        'use strict';
+        return '<img src="images/1.jpg"/>';
+    },
     genderHtml: function(value) {
         'use strict';
         if (value === 0) {
-            return 'Male';
+            return 'Macho';
         } else {
-            return 'Female';
+            return 'Fêmea';
+        }
+    },
+    truthyHtml: function(value) {
+        'use strict';
+        if (value === 0) {
+            return 'Não';
+        } else {
+            return 'Sim';
         }
     }
 };
