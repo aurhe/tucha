@@ -1,14 +1,13 @@
-<h2>Animais registados</h2>
-<table id="table" data-toggle="table" data-pagination="true" data-page-size="10" data-show-toggle="true"
-    data-show-columns="true" data-search="true" data-sort-name="name" data-sort-order="asc">
-    <thead>
-        <tr>
-            <th data-field="name" data-sortable="true">Nome</th>
-            <th data-field="species" data-sortable="true">Espécie</th>
-            <th data-field="gender" data-formatter="genderHtml" data-sortable="true">Sexo</th>
-            <th data-field="breed" data-sortable="true">Raça</th>
-            <th data-field="details" data-sortable="true" data-visible="false">Detalhes</th>
-            <th data-field="id" data-width="90" data-formatter="editButtonHtml" data-switchable="false"></th>
-        </tr>
-    </thead>
-</table>
+<h2>Animais</h2>
+
+<nav>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#animals">Registo</a></li>
+      <li><a href="#animals/adoptions">Adoções</a></li>
+      <li><a href="#animals/agressivity-reports">Relatórios de Agressividade</a></li>
+      <li><a href="#animals/escape-reports">Relatórios de Fugas</a></li>
+      <li><a href="#animals/devolutions">Devoluções</a></li>
+    </ul>
+</nav>
+
+<div id="section-content"></div>

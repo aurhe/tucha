@@ -15,22 +15,23 @@ function loadAnimals() {
 
 	$.get('/partials/animals.html', null, function(data) {
 		$('#content').html(data);
+		$.get('/partials/animalsList.html', null, function(data) {
+			$('#section-content').html(data);
 
-		$.get('/r/animals', null, function(data) {
+			$.get('/r/animals', null, function(data) {
 
-			$('#table').bootstrapTable({
-				data: data
-			});
-		}, 'json');
+				$('#table').bootstrapTable({
+					data: data
+				});
+			}, 'json');
+		}, 'html');
 	}, 'html');
 
 }
 
-function loadAnimal() {
+function loadAnimal(id) {
 	$.get('/partials/animal.html', null, function(data) {
 		$('#content').html(data);
-
-		var id = window.location.hash.split('/')[1];
 
 		$.get('/r/animal/' + id, null, function(data) {
 			$('#name').val(data.name);
@@ -50,8 +51,17 @@ function loadAnimal() {
 function route() {
 	var hash = window.location.hash;
 
-	if (hash.substr(0, 8) === '#animal/') {
-		loadAnimal();
+	if (hash.indexOf('#animals/adoptions') !== -1) {
+		loadAnimalsAdoptions();
+	} else if (hash.indexOf('#animals/devolutions') !== -1) {
+		loadAnimalsDevolutions();
+	} else if (hash.indexOf('#animals/agressivity-reports') !== -1) {
+		loadAnimalsAgressivityReports();
+	} else if (hash.indexOf('#animals/escape-reports') !== -1) {
+		loadAnimalsEscapeReports();
+	} else if (hash.indexOf('#animal/') !== -1) {
+		var id = window.location.hash.split('/')[1];
+		loadAnimal(id);
 	} else {
 		loadAnimals();
 	}
