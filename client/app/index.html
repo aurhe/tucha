@@ -10,6 +10,9 @@
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap-table/src/bootstrap-table.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -39,19 +42,20 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="#adopt">Adoptar</a></li>
+              <li class="disabled"><a href="#adopt">Adoptar</a></li>
+              <li class="disabled"><a href="#adopt">Doações</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown active">
                 <a href="#animals" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gerir <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#animals">Animais</a></li>
-                  <li><a href="#people">Pessoas</a></li>
-                  <li><a href="#veterinary">Acompanhamento Médico</a></li>
-                  <li><a href="#medicaments">Medicamentos</a></li>
+                  <li class="disabled"><a href="#people">Pessoas</a></li>
+                  <li class="disabled"><a href="#veterinary">Acompanhamento Médico</a></li>
+                  <li class="disabled"><a href="#medicaments">Medicamentos</a></li>
                 </ul>
               </li>
-              <li><a href="#statistics">Relatórios</a></li>
+              <li class="disabled"><a href="#statistics">Relatórios</a></li>
               <form class="navbar-form navbar-left" role="login">
                 <a class="btn btn-primary" href="#" role="button">Login</a>
               </form>
@@ -76,23 +80,13 @@
       <!-- build:js(.) scripts/vendor.js -->
       <!-- bower:js -->
       <script src="bower_components/jquery/dist/jquery.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
-      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
       <script src="bower_components/bootstrap-table/src/bootstrap-table.js"></script>
       <script src="bower_components/bootstrap-table/src/extensions/filter/bootstrap-table-filter.js"></script>
       <script src="bower_components/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js"></script>
       <script src="bower_components/bootstrap-table/src/extensions/export/bootstrap-table-export.js"></script>
       <script src="bower_components/bootstrap-table/src/extensions/flatJSON/bootstrap-table-flatJSON.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
       <!-- endbower -->
       <script src="bower_components/bootstrap-table/src/locale/bootstrap-table-pt-PT.js"></script>
       <!-- endbuild -->
