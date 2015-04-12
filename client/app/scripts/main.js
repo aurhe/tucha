@@ -64,6 +64,12 @@ var cellFormatters = {
                 $('#breed').val(data.breed);
                 $('#details').val(data.details);
                 $('#animal').prop('action', '/r/animal/' + id);
+                $('#received_date').datepicker();
+                $('#received_date input').val(data.received_date);
+                $('#sterilization_date').datepicker();
+                $('#sterilization_date input').val(data.sterilization_date);
+                $('#death_date').datepicker();
+                $('#death_date input').val(data.death_date);
             }, 'json');
         }, 'html');
     }
