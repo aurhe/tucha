@@ -1,16 +1,16 @@
 //TODO find a way to avoid using global variables
 /* exported cellFormatters */
 var cellFormatters = {
-    editButtonHtml: function(value) {
+    editButtonHtml: function (value) {
         'use strict';
         return '<a class="btn btn-primary" href="#animal/' + value + '" role="button">' +
             '<i class="glyphicon glyphicon-pencil"></i> Editar</a>';
     },
-    thumbnailHtml: function() {
+    thumbnailHtml: function () {
         'use strict';
         return '<img src="images/1.jpg"/>';
     },
-    genderHtml: function(value) {
+    genderHtml: function (value) {
         'use strict';
         if (value === 0) {
             return 'Macho';
@@ -18,7 +18,7 @@ var cellFormatters = {
             return 'Fêmea';
         }
     },
-    truthyHtml: function(value) {
+    truthyHtml: function (value) {
         'use strict';
         if (value === 0) {
             return 'Não';
@@ -28,17 +28,16 @@ var cellFormatters = {
     }
 };
 
-(function() {
+(function () {
     'use strict';
 
     function loadAnimals() {
-
-        $.get('/partials/animals.html', null, function(data) {
+        $.get('/partials/animals.html', null, function (data) {
             $('#content').html(data);
-            $.get('/partials/animalsList.html', null, function(data) {
+            $.get('/partials/animalsList.html', null, function (data) {
                 $('#section-content').html(data);
 
-                $.get('/r/animals', null, function(data) {
+                $.get('/r/animals', null, function (data) {
 
                     $('#table').bootstrapTable({
                         data: data
@@ -46,31 +45,33 @@ var cellFormatters = {
                 }, 'json');
             }, 'html');
         }, 'html');
-
     }
 
     function loadAnimal(id) {
-        $.get('/partials/animal.html', null, function(data) {
+        $.get('/partials/animal.html', null, function (data) {
             $('#content').html(data);
 
-            $.get('/r/animal/' + id, null, function(data) {
-                $('#name').val(data.name);
-                $('#species').val(data.species);
-                if (data.gender === 0) {
-                    $('#male').prop('checked', true);
-                } else {
-                    $('#female').prop('checked', true);
-                }
-                $('#breed').val(data.breed);
-                $('#details').val(data.details);
-                $('#animal').prop('action', '/r/animal/' + id);
-                $('#received_date').datepicker();
-                $('#received_date input').val(data.received_date);
-                $('#sterilization_date').datepicker();
-                $('#sterilization_date input').val(data.sterilization_date);
-                $('#death_date').datepicker();
-                $('#death_date input').val(data.death_date);
-            }, 'json');
+            if (id !== 'new') {
+                $.get('/r/animal/' + id, null, function (data) {
+                    $('#name').val(data.name);
+                    $('#species').val(data.species);
+                    if (data.gender === 0) {
+                        $('#male').prop('checked', true);
+                    } else {
+                        $('#female').prop('checked', true);
+                    }
+                    $('#breed').val(data.breed);
+                    $('#details').val(data.details);
+                    $('#received_date').datepicker();
+                    $('#received_date input').val(data.received_date);
+                    $('#sterilization_date').datepicker();
+                    $('#sterilization_date input').val(data.sterilization_date);
+                    $('#death_date').datepicker();
+                    $('#death_date input').val(data.death_date);
+                }, 'json');
+            }
+
+            $('#animal').prop('action', '/r/animal/' + id);
         }, 'html');
     }
 
@@ -93,7 +94,7 @@ var cellFormatters = {
         }
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $(window).on('hashchange', route);
         route();
     });
