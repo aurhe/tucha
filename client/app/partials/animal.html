@@ -2,207 +2,229 @@
 
 <form id="animal" class="form-horizontal" method="post">
 
-  <div class="form-group">
-    <label for="name" class="col-sm-3 control-label">Nome</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="name" name="name">
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="name" class="col-sm-3 control-label">Nome</label>
 
-  <div class="form-group">
-    <label for="species" class="col-sm-3 control-label">Espécie</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="species" name="species">
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="gender" class="col-sm-3 control-label">Sexo</label>
-    <div class="col-sm-2 radio">
-      <label><input type="radio" name="gender" id="male" value="0" checked>Macho</label>
-    </div>
-    <div class="col-sm-2 radio">
-      <label><input type="radio" name="gender" id="female" value="1">Fêmea</label>
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="species" class="col-sm-3 control-label">Espécie</label>
 
-  <div class="form-group">
-    <label for="breed" class="col-sm-3 control-label">Raça</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="breed" name="breed">
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="species" name="species">
+        </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="extimated_age" class="col-sm-3 control-label">Idade estimada</label>
-    <div class="col-sm-9">
-      <input type="number" class="form-control" id="extimated_age" name="extimated_age">
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="gender" class="col-sm-3 control-label">Sexo</label>
 
-  <div class="form-group">
-    <label for="size" class="col-sm-3 control-label">Tamanho</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="size" name="size">
+        <div class="col-sm-2 radio">
+            <label><input type="radio" name="gender" id="male" value="0" checked>Macho</label>
+        </div>
+        <div class="col-sm-2 radio">
+            <label><input type="radio" name="gender" id="female" value="1">Fêmea</label>
+        </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="color" class="col-sm-3 control-label">Cor</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="color" name="color">
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="breed" class="col-sm-3 control-label">Raça</label>
 
-  <div class="form-group">
-    <label for="physical_state" class="col-sm-3 control-label">Estado físico</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="physical_state" name="physical_state">
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="breed" name="breed">
+        </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="emotional_state" class="col-sm-3 control-label">Estado emocional</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="emotional_state" name="emotional_state">
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="extimated_age" class="col-sm-3 control-label">Idade estimada</label>
 
-  <div class="form-group">
-    <label for="details" class="col-sm-3 control-label">Detalhes</label>
-    <div class="col-sm-9">
-      <textarea id="details" name="details" class="form-control" rows="3"></textarea>
+        <div class="col-sm-9">
+            <input type="number" class="form-control" id="extimated_age" name="extimated_age">
+        </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="is_adoptable" class="col-sm-3 control-label">Adoptável</label>
-    <div class="col-sm-2 radio">
-      <label><input type="radio" name="is_adoptable" id="yes" value="1" checked>Sim</label>
-    </div>
-    <div class="col-sm-2 radio">
-      <label><input type="radio" name="is_adoptable" id="no" value="0">Não</label>
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="size" class="col-sm-3 control-label">Tamanho</label>
 
-  <div class="form-group">
-    <label for="is_adoptable_reason" class="col-sm-3 control-label">Motivo da Não Adoptabilidade</label>
-    <div class="col-sm-9">
-      <textarea id="is_adoptable_reason" name="is_adoptable_reason" class="form-control" rows="3"></textarea>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="size" name="size">
+        </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="received_by" class="col-sm-3 control-label">Recebido por</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="received_by" name="received_by">
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="color" class="col-sm-3 control-label">Cor</label>
 
-  <div class="form-group">
-    <label for="received_from" class="col-sm-3 control-label">Recebido de</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="received_from" name="received_from">
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="color" name="color">
+        </div>
     </div>
-  </div>
 
-  <div class="form-group date" id="received_date" data-date-format="dd/mm/yyyy">
-    <label for="received_date" class="col-sm-3 control-label">Data Recebimento</label>
-    <div class="col-sm-9">
-      <div class="input-group">
-        <input type="text" class="form-control" name="received_date">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-      </div>
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="physical_state" class="col-sm-3 control-label">Estado físico</label>
 
-  <div class="form-group">
-    <label for="received_reason" class="col-sm-3 control-label">Motivo Recebimento</label>
-    <div class="col-sm-9">
-      <textarea id="received_reason" name="received_reason" class="form-control" rows="3"></textarea>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="physical_state" name="physical_state">
+        </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="received_details" class="col-sm-3 control-label">Detalhes Recebimento</label>
-    <div class="col-sm-9">
-      <textarea id="received_details" name="received_details" class="form-control" rows="3"></textarea>
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="emotional_state" class="col-sm-3 control-label">Estado emocional</label>
 
-  <div class="form-group">
-    <label for="chip_code" class="col-sm-3 control-label">Código do Chip</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="chip_code" name="chip_code">
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="emotional_state" name="emotional_state">
+        </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="is_sterilizated" class="col-sm-3 control-label">Esterilizado</label>
-    <div class="col-sm-2 radio">
-      <label><input type="radio" name="is_sterilizated" id="yes" value="1" checked>Sim</label>
-    </div>
-    <div class="col-sm-2 radio">
-      <label><input type="radio" name="is_sterilizated" id="no" value="0">Não</label>
-    </div>
-  </div>
-  
-  <div class="form-group date" id="sterilization_date" data-date-format="dd/mm/yyyy">
-    <label for="sterilization_date" class="col-sm-3 control-label">Data da Esterilização</label>
-    <div class="col-sm-9">
-      <div class="input-group">
-        <input type="text" class="form-control" name="sterilization_date">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-      </div>
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="details" class="col-sm-3 control-label">Detalhes</label>
 
-  <div class="form-group">
-    <label for="sterilization_by" class="col-sm-3 control-label">Esterilizado por</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="sterilization_by" name="sterilization_by">
+        <div class="col-sm-9">
+            <textarea id="details" name="details" class="form-control" rows="3"></textarea>
+        </div>
     </div>
-  </div>
-  
-  <div class="form-group">
-    <label for="sterilization_details" class="col-sm-3 control-label">Detalhes da Esterilização</label>
-    <div class="col-sm-9">
-      <textarea id="sterilization_details" name="sterilization_details" class="form-control" rows="3"></textarea>
-    </div>
-  </div>
 
-  <div class="form-group">
-    <label for="is_dead" class="col-sm-3 control-label">Falecido</label>
-    <div class="col-sm-2 radio">
-      <label><input type="radio" name="is_dead" id="yes" value="1" checked>Sim</label>
-    </div>
-    <div class="col-sm-2 radio">
-      <label><input type="radio" name="is_dead" id="no" value="0">Não</label>
-    </div>
-  </div>
+    <div class="form-group">
+        <label for="is_adoptable" class="col-sm-3 control-label">Adoptável</label>
 
-  <div class="form-group date" id="death_date" data-date-format="dd/mm/yyyy">
-    <label for="death_date" class="col-sm-3 control-label">Data do Falecimento</label>
-    <div class="col-sm-9">
-      <div class="input-group">
-        <input type="text" class="form-control" name="death_date">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-      </div>
+        <div class="col-sm-2 radio">
+            <label><input type="radio" name="is_adoptable" id="yes" value="1" checked>Sim</label>
+        </div>
+        <div class="col-sm-2 radio">
+            <label><input type="radio" name="is_adoptable" id="no" value="0">Não</label>
+        </div>
     </div>
-  </div>
-  
-  <div class="form-group">
-    <label for="death_reason" class="col-sm-3 control-label">Motivo do Falecimento</label>
-    <div class="col-sm-9">
-      <textarea id="death_reason" name="death_reason" class="form-control" rows="3"></textarea>
+
+    <div class="form-group">
+        <label for="is_adoptable_reason" class="col-sm-3 control-label">Motivo da Não Adoptabilidade</label>
+
+        <div class="col-sm-9">
+            <textarea id="is_adoptable_reason" name="is_adoptable_reason" class="form-control" rows="3"></textarea>
+        </div>
     </div>
-  </div>
-  
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-9">
-      <button type="submit" class="btn btn-primary">Gravar</button>
-      <a class="btn btn-default" href="#animals" role="button">Cancelar</a>
+
+    <!--<div class="form-group">-->
+    <!--<label for="received_by" class="col-sm-3 control-label">Recebido por</label>-->
+    <!--<div class="col-sm-9">-->
+    <!--<input type="text" class="form-control" id="received_by" name="received_by">-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+    <!--<label for="received_from" class="col-sm-3 control-label">Recebido de</label>-->
+    <!--<div class="col-sm-9">-->
+    <!--<input type="text" class="form-control" id="received_from" name="received_from">-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="form-group date" id="received_date" data-date-format="dd/mm/yyyy">
+        <label for="received_date" class="col-sm-3 control-label">Data Recebimento</label>
+
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input type="text" class="form-control" name="received_date">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <div class="form-group">
+        <label for="received_reason" class="col-sm-3 control-label">Motivo Recebimento</label>
+
+        <div class="col-sm-9">
+            <textarea id="received_reason" name="received_reason" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="received_details" class="col-sm-3 control-label">Detalhes Recebimento</label>
+
+        <div class="col-sm-9">
+            <textarea id="received_details" name="received_details" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="chip_code" class="col-sm-3 control-label">Código do Chip</label>
+
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="chip_code" name="chip_code">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="is_sterilizated" class="col-sm-3 control-label">Esterilizado</label>
+
+        <div class="col-sm-2 radio">
+            <label><input type="radio" name="is_sterilizated" id="yes" value="1" checked>Sim</label>
+        </div>
+        <div class="col-sm-2 radio">
+            <label><input type="radio" name="is_sterilizated" id="no" value="0">Não</label>
+        </div>
+    </div>
+
+    <div class="form-group date" id="sterilization_date" data-date-format="dd/mm/yyyy">
+        <label for="sterilization_date" class="col-sm-3 control-label">Data da Esterilização</label>
+
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input type="text" class="form-control" name="sterilization_date">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="form-group">-->
+    <!--<label for="sterilization_by" class="col-sm-3 control-label">Esterilizado por</label>-->
+    <!--<div class="col-sm-9">-->
+    <!--<input type="text" class="form-control" id="sterilization_by" name="sterilization_by">-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="form-group">
+        <label for="sterilization_details" class="col-sm-3 control-label">Detalhes da Esterilização</label>
+
+        <div class="col-sm-9">
+            <textarea id="sterilization_details" name="sterilization_details" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="is_dead" class="col-sm-3 control-label">Falecido</label>
+
+        <div class="col-sm-2 radio">
+            <label><input type="radio" name="is_dead" id="yes" value="1" checked>Sim</label>
+        </div>
+        <div class="col-sm-2 radio">
+            <label><input type="radio" name="is_dead" id="no" value="0">Não</label>
+        </div>
+    </div>
+
+    <div class="form-group date" id="death_date" data-date-format="dd/mm/yyyy">
+        <label for="death_date" class="col-sm-3 control-label">Data do Falecimento</label>
+
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input type="text" class="form-control" name="death_date">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="death_reason" class="col-sm-3 control-label">Motivo do Falecimento</label>
+
+        <div class="col-sm-9">
+            <textarea id="death_reason" name="death_reason" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-9">
+            <button type="submit" class="btn btn-primary">Gravar</button>
+            <a class="btn btn-default" href="#animals" role="button">Cancelar</a>
+        </div>
+    </div>
 
 </form>
