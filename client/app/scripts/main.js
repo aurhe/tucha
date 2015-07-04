@@ -47,75 +47,45 @@ var cellFormatters = {
         }, 'html');
     }
 
-    function setAdoptable(value) {
-        if (value) {
-            $('#is_adoptable_reason').prop('disabled', true);
-        } else {
-            $('#is_adoptable_reason').prop('disabled', false);
-        }
-    }
-
-    function setSterilizated(value) {
-        if (value) {
-            $('#sterilization_date input').prop('disabled', false);
-            $('#sterilization_date').datepicker();
-            $('#sterilization_details').prop('disabled', false);
-        } else {
-            $('#sterilization_date input').prop('disabled', true);
-            $('#sterilization_date').datepicker('remove');
-            $('#sterilization_details').prop('disabled', true);
-        }
-    }
-
-    function setDead(value) {
-        if (value) {
-            $('#death_date input').prop('disabled', false);
-            $('#death_date').datepicker();
-            $('#death_reason').prop('disabled', false);
-        } else {
-            $('#death_date input').prop('disabled', true);
-            $('#death_date').datepicker('remove');
-            $('#death_reason').prop('disabled', true);
-        }
-    }
-
     function loadAnimal(id) {
         $.get('/partials/animal.html', null, function (data) {
             $('#content').html(data);
 
+            $('#received_date').datepicker();
+            $('#sterilization_date').datepicker();
+            $('#death_date').datepicker();
+
             $('#is_adoptable_yes').change(function () {
-                setAdoptable(true);
+                $('#is_adoptable_reason_related_inputs').hide();
             });
             $('#is_adoptable_no').change(function () {
-                setAdoptable(false);
+                $('#is_adoptable_reason_related_inputs').show();
             });
 
             $('#is_sterilizated_yes').change(function () {
-                setSterilizated(true);
+                $('#is_sterilizated_related_inputs').show();
             });
             $('#is_sterilizated_no').change(function () {
-                setSterilizated(false);
+                $('#is_sterilizated_related_inputs').hide();
             });
 
             $('#is_dead_yes').change(function () {
-                setDead(true);
+                $('#is_dead_related_inputs').show();
             });
             $('#is_dead_no').change(function () {
-                setDead(false);
+                $('#is_dead_related_inputs').hide();
             });
-
-            $('#received_date').datepicker();
 
             if (id === 'new') {
                 // set defaults
                 $('#species').val("Cão");
                 $('#female').prop('checked', true);
                 $('#is_adoptable_yes').prop('checked', true);
-                setAdoptable(true);
+                $('#is_adoptable_reason_related_inputs').hide();
                 $('#is_sterilizated_no').prop('checked', true);
-                setSterilizated(false);
+                $('#is_sterilizated_related_inputs').hide();
                 $('#is_dead_no').prop('checked', true);
-                setDead(false);
+                $('#is_dead_related_inputs').hide();
             } else {
                 $.get('/r/animal/' + id, null, function (data) {
                     $('#name').val(data.name);
@@ -128,19 +98,38 @@ var cellFormatters = {
                     $('#physical_state').val(data.physical_state);
                     $('#emotional_state').val(data.emotional_state);
                     $('#details').val(data.details);
-                    $(data.is_adoptable === 0 ? '#is_adoptable_no' : '#is_adoptable_yes').prop('checked', true);
-                    setAdoptable(data.is_adoptable === 1);
+
+                    if (data.is_adoptable === 0) {
+                        $('#is_adoptable_no').prop('checked', true);
+                        $('#is_adoptable_reason_related_inputs').show();
+                    } else {
+                        $('#is_adoptable_yes').prop('checked', true);
+                        $('#is_adoptable_reason_related_inputs').hide();
+                    }
                     $('#is_adoptable_reason').val(data.is_adoptable_reason);
+
                     $('#received_date input').val(data.received_date);
                     $('#received_reason').val(data.received_reason);
                     $('#received_details').val(data.received_details);
                     $('#chip_code').val(data.chip_code);
-                    $(data.is_sterilizated === 0 ? '#is_sterilizated_no' : '#is_sterilizated_yes').prop('checked', true);
-                    setSterilizated(data.is_sterilizated === 1);
+
+                    if (data.is_sterilizated === 0) {
+                        $('#is_sterilizated_no').prop('checked', true);
+                        $('#is_sterilizated_related_inputs').hide();
+                    } else {
+                        $('#is_sterilizated_yes').prop('checked', true);
+                        $('#is_sterilizated_related_inputs').show();
+                    }
                     $('#sterilization_date input').val(data.sterilization_date);
                     $('#sterilization_details').val(data.sterilization_details);
-                    $(data.is_dead === 0 ? '#is_dead_no' : '#is_dead_yes').prop('checked', true);
-                    setDead(data.is_dead === 1);
+
+                    if (data.is_dead === 0) {
+                        $('#is_dead_no').prop('checked', true);
+                        $('#is_dead_related_inputs').hide();
+                    } else {
+                        $('#is_dead_yes').prop('checked', true);
+                        $('#is_dead_related_inputs').show();
+                    }
                     $('#death_date input').val(data.death_date);
                     $('#death_reason').val(data.death_reason);
                 }, 'json');
