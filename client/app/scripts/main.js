@@ -78,7 +78,7 @@ var cellFormatters = {
 
             if (id === 'new') {
                 // set defaults
-                $('#species').val("Cão");
+                $('#species').val('Cão');
                 $('#female').prop('checked', true);
                 $('#is_adoptable_yes').prop('checked', true);
                 $('#is_adoptable_reason_related_inputs').hide();
@@ -108,7 +108,9 @@ var cellFormatters = {
                     }
                     $('#is_adoptable_reason').val(data.is_adoptable_reason);
 
-                    $('#received_date input').val(data.received_date);
+                    if (!isNaN(Date.parse(data.received_date))) {
+                        $('#received_date').datepicker("setDate", new Date(data.received_date));
+                    }
                     $('#received_reason').val(data.received_reason);
                     $('#received_details').val(data.received_details);
                     $('#chip_code').val(data.chip_code);
@@ -120,7 +122,9 @@ var cellFormatters = {
                         $('#is_sterilizated_yes').prop('checked', true);
                         $('#is_sterilizated_related_inputs').show();
                     }
-                    $('#sterilization_date input').val(data.sterilization_date);
+                    if (!isNaN(Date.parse(data.sterilization_date))) {
+                        $('#sterilization_date').datepicker("setDate", new Date(data.sterilization_date));
+                    }
                     $('#sterilization_details').val(data.sterilization_details);
 
                     if (data.is_dead === 0) {
@@ -130,7 +134,9 @@ var cellFormatters = {
                         $('#is_dead_yes').prop('checked', true);
                         $('#is_dead_related_inputs').show();
                     }
-                    $('#death_date input').val(data.death_date);
+                    if (!isNaN(Date.parse(data.death_date))) {
+                        $('#death_date').datepicker("setDate", new Date(data.death_date));
+                    }
                     $('#death_reason').val(data.death_reason);
                 }, 'json');
             }
