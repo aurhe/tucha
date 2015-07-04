@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div id="is_adoptable_reason_related_inputs" class="form-group">
         <label for="is_adoptable_reason" class="col-sm-3 control-label">Motivo da Não Adoptabilidade</label>
 
         <div class="col-sm-9">
@@ -164,29 +164,32 @@
         </div>
     </div>
 
-    <div class="form-group date" id="sterilization_date" data-date-format="dd/mm/yyyy">
-        <label for="sterilization_date" class="col-sm-3 control-label">Data da Esterilização</label>
+    <div id="is_sterilizated_related_inputs">
+        <div class="form-group date" id="sterilization_date" data-date-format="dd/mm/yyyy">
+            <label for="sterilization_date" class="col-sm-3 control-label">Data da Esterilização</label>
 
-        <div class="col-sm-9">
-            <div class="input-group">
-                <input type="text" class="form-control" name="sterilization_date">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="sterilization_date">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!--<div class="form-group">-->
-    <!--<label for="sterilization_by" class="col-sm-3 control-label">Esterilizado por</label>-->
-    <!--<div class="col-sm-9">-->
-    <!--<input type="text" class="form-control" id="sterilization_by" name="sterilization_by">-->
-    <!--</div>-->
-    <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<label for="sterilization_by" class="col-sm-3 control-label">Esterilizado por</label>-->
+        <!--<div class="col-sm-9">-->
+        <!--<input type="text" class="form-control" id="sterilization_by" name="sterilization_by">-->
+        <!--</div>-->
+        <!--</div>-->
 
-    <div class="form-group">
-        <label for="sterilization_details" class="col-sm-3 control-label">Detalhes da Esterilização</label>
+        <div class="form-group">
+            <label for="sterilization_details" class="col-sm-3 control-label">Detalhes da Esterilização</label>
 
-        <div class="col-sm-9">
-            <textarea id="sterilization_details" name="sterilization_details" class="form-control" rows="3"></textarea>
+            <div class="col-sm-9">
+                <textarea id="sterilization_details" name="sterilization_details" class="form-control"
+                          rows="3"></textarea>
+            </div>
         </div>
     </div>
 
@@ -201,22 +204,24 @@
         </div>
     </div>
 
-    <div class="form-group date" id="death_date" data-date-format="dd/mm/yyyy">
-        <label for="death_date" class="col-sm-3 control-label">Data do Falecimento</label>
+    <div id="is_dead_related_inputs">
+        <div class="form-group date" id="death_date" data-date-format="dd/mm/yyyy">
+            <label for="death_date" class="col-sm-3 control-label">Data do Falecimento</label>
 
-        <div class="col-sm-9">
-            <div class="input-group">
-                <input type="text" class="form-control" name="death_date">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="death_date">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="death_reason" class="col-sm-3 control-label">Motivo do Falecimento</label>
+        <div class="form-group">
+            <label for="death_reason" class="col-sm-3 control-label">Motivo do Falecimento</label>
 
-        <div class="col-sm-9">
-            <textarea id="death_reason" name="death_reason" class="form-control" rows="3"></textarea>
+            <div class="col-sm-9">
+                <textarea id="death_reason" name="death_reason" class="form-control" rows="3"></textarea>
+            </div>
         </div>
     </div>
 
