@@ -89,7 +89,7 @@ body {
     }
 }
 
-.bootstrap-table table td:first-child {
+.bootstrap-table table td:nth-child(2) {
     padding: 0;
 
     img {
@@ -99,9 +99,9 @@ body {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-    .container {
+    /*.container {
         max-width: 730px;
-    }
+    }*/
 
     /* Remove the padding we set earlier */
     .header,
