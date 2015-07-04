@@ -7,18 +7,20 @@
        data-search-align="left">
     <thead>
     <tr>
-        <th data-formatter="cellFormatters.thumbnailHtml"></th>
-        <th data-field="name" data-sortable="true">Nome</th>
+        <th data-field="id" data-sortable="true" data-width="50">Id</th>
+        <th data-formatter="cellFormatters.thumbnailHtml" data-width="50">Foto</th>
+        <th data-field="name" data-sortable="true" data-width="150">Nome</th>
         <th data-field="species" data-sortable="true" data-visible="false">Espécie</th>
-        <th data-field="gender" data-formatter="cellFormatters.genderHtml" data-sortable="true">Sexo</th>
-        <th data-field="breed" data-sortable="true">Raça</th>
-        <th data-field="extimated_age" data-sortable="true">Idade</th>
-        <th data-field="size" data-sortable="true">Tamanho</th>
+        <th data-field="gender" data-formatter="cellFormatters.genderHtml" data-sortable="true" data-width="50">Sexo</th>
+        <th data-field="breed" data-sortable="true" data-visible="false">Raça</th>
+        <th data-field="extimated_age" data-sortable="true" data-width="50">Idade</th>
+        <th data-field="size" data-sortable="true" data-visible="false">Tamanho</th>
         <th data-field="color" data-sortable="true" data-visible="false">Cor</th>
         <th data-field="physical_state" data-sortable="true" data-visible="false">Estado Físico</th>
         <th data-field="emotional_state" data-sortable="true" data-visible="false">Estado Emocional</th>
-        <th data-field="details" data-sortable="true" data-visible="false" data-visible="false">Detalhes</th>
-        <th data-field="is_adoptable" data-sortable="true" data-formatter="cellFormatters.truthyHtml">Adoptável</th>
+        <th data-field="is_adoptable" data-sortable="true" data-formatter="cellFormatters.truthyHtml" data-width="100">
+            Adoptável
+        </th>
         <th data-field="is_adoptable_reason" data-sortable="true" data-visible="false">Motivo da Não Adoptabilidade</th>
         <th data-field="received_by" data-sortable="true" data-visible="false">Recebido por</th>
         <th data-field="received_from" data-sortable="true" data-visible="false">Recebido de</th>
@@ -26,7 +28,8 @@
         <th data-field="received_reason" data-sortable="true" data-visible="false">Motivo Recebimento</th>
         <th data-field="received_details" data-sortable="true" data-visible="false">Detalhes Recebimento</th>
         <th data-field="chip_code" data-sortable="true" data-visible="false">Código do Chip</th>
-        <th data-field="is_sterilizated" data-sortable="true" data-formatter="cellFormatters.truthyHtml">Esterilizado
+        <th data-field="is_sterilizated" data-sortable="true" data-formatter="cellFormatters.truthyHtml"
+            data-width="100">Esterilizado
         </th>
         <th data-field="sterilization_date" data-sortable="true" data-visible="false">Data da Esterilização</th>
         <th data-field="sterilization_by" data-sortable="true" data-visible="false">Esterilizado por</th>
@@ -36,6 +39,7 @@
         </th>
         <th data-field="death_date" data-sortable="true" data-visible="false">Data do Falecimento</th>
         <th data-field="death_reason" data-sortable="true" data-visible="false">Motivo do Falecimento</th>
+        <th data-field="details" data-sortable="true">Detalhes</th>
         <th data-field="id" data-width="90" data-formatter="cellFormatters.editButtonHtml" data-switchable="false"></th>
     </tr>
     </thead>
