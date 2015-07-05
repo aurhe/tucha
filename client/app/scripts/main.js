@@ -6,9 +6,9 @@ var cellFormatters = {
         return '<a class="btn btn-primary" href="#animal/' + value + '" role="button">' +
             '<i class="glyphicon glyphicon-pencil"></i> Editar</a>';
     },
-    thumbnailHtml: function () {
+    thumbnailHtml: function (value) {
         'use strict';
-        return '<img src="images/1.jpg"/>';
+        return '<img src="r/animal/' + value + '/picture"/>';
     },
     genderHtml: function (value) {
         'use strict';

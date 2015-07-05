@@ -6,9 +6,11 @@ Still a work in progress.
 
 ## Build instructions
 
-Requires [Node.js](http://nodejs.org/) and [Grunt](http://gruntjs.com/).
+Requires [Node.js](http://nodejs.org/), [Grunt](http://gruntjs.com/) and [MySQL](https://www.mysql.com/).
 
 Load the database/script.sql to a MySQL database and configure server/main.js to connect to it.
+
+To connect with Dropbox, configure the API credentials in server/main.js.
 
 ### Server
 ```
@@ -24,5 +26,7 @@ $ grunt build
 ```
 
 ## License
+
+Copyright (C) 2015 Aurélio Santos
 
 Licensed under the GPL v3 license.

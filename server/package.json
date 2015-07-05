@@ -17,7 +17,9 @@
     "dependencies": {
         "express": "^4.12.2",
         "body-parser": "^1.12.2",
-        "mysql": "^2.5.5"
+        "multer": "^0.1.8",
+        "mysql": "^2.5.5",
+        "dropbox": "^0.10.3"
     },
     "devDependencies": {
         "grunt-cli": "^0.1.13",
