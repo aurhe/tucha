@@ -2,23 +2,15 @@
 
 'use strict';
 
-var express = require('express');
-var bodyParser = require('body-parser');
-
-var app = express();
-var urlencodedParser = bodyParser.urlencoded({
-    extended: false
-});
-
+var dropbox = require('dropbox');
 var mysql = require('mysql');
 
-// var connection = mysql.createConnection({
-//     host: process.env.OPENSHIFT_MYSQL_DB_HOST,
-//     port: process.env.OPENSHIFT_MYSQL_DB_PORT,
-//     user: 'user',
-//     password: 'password'
-// });
-
+// replace dropbox and mysql credentials here
+var client = new dropbox.Client({
+    key: 'key',
+    secret: 'secret',
+    token: 'token'
+});
 var connection = mysql.createConnection({
     host: '127.0.0.1',
     port: '3306',
@@ -27,6 +19,17 @@ var connection = mysql.createConnection({
 });
 
 connection.connect();
+
+var express = require('express');
+var bodyParser = require('body-parser'); // parse form data
+var multer = require('multer'); // parse file uploads
+
+var app = express();
+var urlencodedParser = bodyParser.urlencoded({
+    extended: false
+});
+
+app.use(multer({inMemory: true}));
 
 //html
 app.use(express.static('public'));
@@ -46,11 +49,35 @@ app.get('/r/animal/:id', urlencodedParser, function (req, res) {
     });
 });
 
+var emptyImage = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64'); // 1px gif
+app.get('/r/animal/:id/picture', urlencodedParser, function (req, res) {
+    client.readdir(req.params.id + '', function (error, entries) {
+        if (error || entries.length === 0) {
+            res.writeHead(200, {'Content-Type': 'image/gif'});
+            res.end(emptyImage);
+        } else if (entries.length > 0) {
+            client.readFile(req.params.id + '/' + entries[0], {binary: true}, function (error, data, stat) {
+                if (error) {
+                    console.log(error);
+                }
+                console.log('Sending file ' + entries[0]);
+                res.writeHead(200, {'Content-Type': stat.mimeType});
+                res.end(data, 'binary');
+            });
+        }
+    });
+});
+
 app.post('/r/animal/:id', urlencodedParser, function (req, res) {
-    var sql, keys;
+    var sql, keys = Object.keys(req.body);
+
+    console.log(req.body);
+
+    //var picture = req.body.picture;
+    //keys.splice(keys.indexOf('picture'), 1); // do not try to insert it into the db
+
     if (req.params.id === 'new') {
         sql = 'insert into tucha.animal (';
-        keys = Object.keys(req.body);
 
         for (var i = 0; i < keys.length - 1; i++) {
             sql += keys[i] + ', '
@@ -63,13 +90,24 @@ app.post('/r/animal/:id', urlencodedParser, function (req, res) {
         console.log(sql);
         connection.query(sql, function (err, rows) {
             if (err) {
-                throw err;
+                console.log(err);
             }
+
+            client.mkdir(rows.insertId + '');
+
+            if (typeof req.files.picture !== 'undefined') { // image upload
+                client.writeFile(rows.insertId + '/' + req.files.picture.originalname, req.files.picture.buffer, function (error, stat) {
+                    if (error) {
+                        console.log(error);
+                    }
+                    console.log('Dropbox file saved: ' + rows.insertId + '/' + req.files.picture.originalname);
+                });
+            }
+
             res.redirect('/#/animals');
         });
     } else {
         sql = 'update tucha.animal set ';
-        keys = Object.keys(req.body);
 
         for (var i = 0; i < keys.length - 1; i++) {
             sql += keys[i] + '=' + mysql.escape(req.body[keys[i]]) + ', ';
@@ -78,10 +116,19 @@ app.post('/r/animal/:id', urlencodedParser, function (req, res) {
         console.log(sql);
         connection.query(sql, function (err, rows) {
             if (err) {
-                throw err;
+                console.log(err);
             }
             res.redirect('/#/animals');
         });
+
+        if (typeof req.files.picture !== 'undefined') { // image upload
+            client.writeFile(req.params.id + '/' + req.files.picture.originalname, req.files.picture.buffer, function (error, stat) {
+                if (error) {
+                    console.log(error);
+                }
+                console.log('Dropbox file saved: ' + req.params.id + '/' + req.files.picture.originalname);
+            });
+        }
     }
 });
 
