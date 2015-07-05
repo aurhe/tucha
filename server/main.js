@@ -29,7 +29,10 @@ var urlencodedParser = bodyParser.urlencoded({
     extended: false
 });
 
-app.use(multer({inMemory: true}));
+app.use(multer({
+    inMemory: true,
+    includeEmptyFields: true
+}));
 
 //html
 app.use(express.static('public'));
