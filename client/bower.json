@@ -1,9 +1,11 @@
 {
-	"name": "tucha",
-	"private": true,
-	"dependencies": {
-		"bootstrap-sass-official": "~3.3.0",
-		"bootstrap-table": "~1.6.0",
-		"bootstrap-datepicker": "~1.4.0"
-	}
+    "name": "tucha",
+    "private": true,
+    "dependencies": {
+        "bootstrap-sass-official": "~3.3.0",
+        "bootstrap-table": "~1.6.0",
+        "bootstrap-datepicker": "~1.4.0",
+        "slick-carousel": "~1.5.5",
+        "jquery-textfill": "~0.6.0"
+    }
 }
