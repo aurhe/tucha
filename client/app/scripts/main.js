@@ -25,6 +25,14 @@ var cellFormatters = {
         } else {
             return 'Sim';
         }
+    },
+    age: function (value) {
+        'use strict';
+        if (value && value !== 0) {
+            return new Date().getUTCFullYear() - value;
+        } else {
+            return '';
+        }
     }
 };
 
@@ -92,7 +100,7 @@ var cellFormatters = {
                     $('#species').val(data.species);
                     $(data.gender === 0 ? '#male' : '#female').prop('checked', true);
                     $('#breed').val(data.breed);
-                    $('#extimated_age').val(data.extimated_age);
+                    $('#year_of_birth').val(data.year_of_birth);
                     $('#size').val(data.size);
                     $('#color').val(data.color);
                     $('#physical_state').val(data.physical_state);
