@@ -1,0 +1,106 @@
+@font-face {
+    font-family: texgyreadventor;
+    src: local(texgyreadventor), url('texgyreadventor-bold.otf') format('opentype');
+}
+
+body {
+    //background-color: black;
+    font-family: "texgyreadventor", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+
+    width: 960px; // old website limitation
+
+    //background-color: #19191F;
+    //background-image: linear-gradient(#5FAAD5, #ffffff);
+}
+
+.slider {
+    width: 70%;
+    display: inline-block;
+
+    .slick-prev,
+    .slick-next {
+        width: 60px;
+        height: 60px;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+        font-size: 60px;
+        opacity: 0;
+    }
+
+    img {
+        width: 100%;
+    }
+}
+
+.slider:hover .slick-prev:before,
+.slider:hover .slick-next:before {
+    opacity: 0.75;
+}
+
+.nav-slider {
+    width: 100%;
+    cursor: pointer;
+
+    .slick-slide {
+        width: 30%;
+
+        img {
+            width: 90%;
+        }
+    }
+}
+
+.slider-text {
+    color: #435A8D;
+    width: 30%;
+    float: right;
+    text-align: center;
+
+    .adopt-text {
+        margin-top: 70px;
+        margin-bottom: 0px;
+        font-size: 40px;
+    }
+
+    #dog-name {
+        height: 100px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    p {
+
+        a {
+            color: #435A8D;
+            font-size: 20px;
+        }
+
+        &.phone-number {
+            margin-top: 50px;
+
+            a {
+                font-size: 35px;
+            }
+        }
+
+        &.email-address {
+            //margin-top: 10%;
+
+            a {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+.slick-next {
+    right: 0px;
+}
+
+.slick-prev {
+    left: 0px;
+}
+

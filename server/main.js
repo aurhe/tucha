@@ -38,6 +38,14 @@ app.use(multer({
 app.use(express.static('public'));
 
 //rest
+
+app.get('/r/adoptableAnimals', function (req, res) {
+    console.log('select id,name,gender from tucha.animal where is_adoptable=true and is_dead=false');
+    connection.query('select id,name,gender from tucha.animal where is_adoptable=true and is_dead=false', function (err, rows) {
+        res.json(rows);
+    });
+});
+
 app.get('/r/animals', function (req, res) {
     console.log('select * from tucha.animal');
     connection.query('select * from tucha.animal', function (err, rows) {

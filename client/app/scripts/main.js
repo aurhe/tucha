@@ -109,7 +109,7 @@ var cellFormatters = {
                     $('#is_adoptable_reason').val(data.is_adoptable_reason);
 
                     if (!isNaN(Date.parse(data.received_date))) {
-                        $('#received_date').datepicker("setDate", new Date(data.received_date));
+                        $('#received_date').datepicker('setDate', new Date(data.received_date));
                     }
                     $('#received_reason').val(data.received_reason);
                     $('#received_details').val(data.received_details);
@@ -123,7 +123,7 @@ var cellFormatters = {
                         $('#is_sterilizated_related_inputs').show();
                     }
                     if (!isNaN(Date.parse(data.sterilization_date))) {
-                        $('#sterilization_date').datepicker("setDate", new Date(data.sterilization_date));
+                        $('#sterilization_date').datepicker('setDate', new Date(data.sterilization_date));
                     }
                     $('#sterilization_details').val(data.sterilization_details);
 
@@ -135,7 +135,7 @@ var cellFormatters = {
                         $('#is_dead_related_inputs').show();
                     }
                     if (!isNaN(Date.parse(data.death_date))) {
-                        $('#death_date').datepicker("setDate", new Date(data.death_date));
+                        $('#death_date').datepicker('setDate', new Date(data.death_date));
                     }
                     $('#death_reason').val(data.death_reason);
                 }, 'json');
