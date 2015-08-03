@@ -9,7 +9,8 @@
             fade: true,
             cssEase: 'linear',
             asNavFor: '.nav-slider',
-            lazyLoad: 'ondemand'
+            lazyLoad: 'ondemand',
+            adaptiveHeight: true
         });
         $('.nav-slider').slick({
             //arrows: false,

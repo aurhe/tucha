@@ -8,7 +8,7 @@ var cellFormatters = {
     },
     thumbnailHtml: function (value) {
         'use strict';
-        return '<img src="r/animal/' + value + '/picture"/>';
+        return '<img src="r/animal/' + value + '/thumbnail"/>';
     },
     genderHtml: function (value) {
         'use strict';

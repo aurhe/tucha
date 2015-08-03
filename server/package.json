@@ -19,7 +19,7 @@
         "body-parser": "^1.12.2",
         "multer": "^0.1.8",
         "mysql": "^2.5.5",
-        "dropbox": "^0.10.3"
+        "jimp": "^0.2.4"
     },
     "devDependencies": {
         "grunt-cli": "^0.1.13",
