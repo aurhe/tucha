@@ -52,7 +52,7 @@ app.get('/r/adoptableAnimals', function (req, res) {
 
 app.get('/r/animals', function (req, res) {
     var sql = 'select id, name, species, gender, breed, date_of_birth, size, color,' +
-        ' details, is_adoptable, is_adoptable_reason, received_by, received_from, received_date, received_reason,' +
+        ' details, is_adoptable, is_adoptable_reason, received_by, received_from, received_date,' +
         ' received_details, chip_code, is_sterilizated, sterilization_date, sterilization_by, sterilization_details,' +
         ' is_dead, death_date, death_reason' +
         ' from tucha.animal where is_deleted is null';
@@ -176,7 +176,7 @@ app.post('/r/animal/:id', urlencodedParser, function (req, res) {
             delete data['state_date_' + id];
         }
         if (keys[i].indexOf('state_details_') !== -1) {
-            id = Number.parseInt(keys[i].substr(11), 10);
+            id = Number.parseInt(keys[i].substr(14), 10);
             delete data['state_details_' + id];
         }
     }

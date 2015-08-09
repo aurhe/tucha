@@ -138,7 +138,6 @@ var cellFormatters = {
                     if (!isNaN(Date.parse(data.received_date))) {
                         $('#received_date').datepicker('setDate', new Date(data.received_date));
                     }
-                    $('#received_reason').val(data.received_reason);
                     $('#received_details').val(data.received_details);
                     $('#chip_code').val(data.chip_code);
 
