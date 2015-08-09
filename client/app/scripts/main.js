@@ -28,7 +28,7 @@ var cellFormatters = {
     },
     age: function (value) {
         'use strict';
-        if (value && value !== 0) {
+        if (value && value !== '0000-00-00') {
             return new Date(new Date() - new Date(value)).getUTCFullYear() - 1970;
         } else {
             return '';
@@ -55,14 +55,30 @@ var cellFormatters = {
         }, 'html');
     }
 
+    function addState(state) {
+        $('#state_container').append(
+            '<div class="form-group">' +
+            '<div class="col-sm-3"></div>' +
+            '<div class="col-sm-3 date" id="state_' + state.position + '" data-provide="datepicker" data-date-format="yyyy-mm-dd">' +
+            '<div class="input-group">' +
+            '<input type="text" class="form-control" name="state_date_' + state.position + '">' +
+            '<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-sm-6">' +
+            '<input type="text" class="form-control" id="state_details_' + state.position + '" name="state_details_' + state.position + '">' +
+            '</div>' +
+            '</div>'
+        );
+        $('#state_' + state.position).datepicker('setDate', state.date);
+        $('#state_details_' + state.position).val(state.details);
+    }
+
     function loadAnimal(id) {
+        var statesCount = 0;
+
         $.get('/partials/animal.html', null, function (data) {
             $('#content').html(data);
-
-            $('#received_date').datepicker();
-            $('#sterilization_date').datepicker();
-            $('#death_date').datepicker();
-            $('#date_of_birth').datepicker();
 
             $('#is_adoptable_yes').change(function () {
                 $('#is_adoptable_reason_related_inputs').hide();
@@ -150,7 +166,23 @@ var cellFormatters = {
                     }
                     $('#death_reason').val(data.death_reason);
                 }, 'json');
+
+                $.get('/r/animal/' + id + '/states', null, function (data) {
+                    statesCount = data.length;
+                    for (var i = 0; i < data.length; i++) {
+                        addState(data[i]);
+                    }
+                }, 'json');
             }
+
+            $('#state_button').click(function () {
+                addState({
+                    position: statesCount,
+                    date: new Date()
+                });
+                statesCount++;
+                return false;
+            });
 
             $('#animal').prop('action', '/r/animal/' + id);
         }, 'html');

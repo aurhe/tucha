@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <div class="form-group date" id="date_of_birth" data-date-format="yyyy-mm-dd">
+    <div class="form-group date" id="date_of_birth" data-provide="datepicker" data-date-format="yyyy-mm-dd">
         <label for="date_of_birth" class="col-sm-3 control-label">Data Nascimento</label>
 
         <div class="col-sm-9">
@@ -64,21 +64,16 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="physical_state" class="col-sm-3 control-label">Estado físico</label>
+
+    <div class="form-group date">
+        <label for="state" class="col-sm-3 control-label">Estado</label>
 
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="physical_state" name="physical_state">
+            <button id="state_button" class="btn btn-primary">Adicionar Estado</button>
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="emotional_state" class="col-sm-3 control-label">Estado emocional</label>
-
-        <div class="col-sm-9">
-            <input type="text" class="form-control" id="emotional_state" name="emotional_state">
-        </div>
-    </div>
+    <span id="state_container"></span>
 
     <div class="form-group">
         <label for="details" class="col-sm-3 control-label">Detalhes</label>
@@ -121,7 +116,7 @@
     <!--</div>-->
     <!--</div>-->
 
-    <div class="form-group date" id="received_date" data-date-format="yyyy-mm-dd">
+    <div class="form-group date" id="received_date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
         <label for="received_date" class="col-sm-3 control-label">Data Recebimento</label>
 
         <div class="col-sm-9">
@@ -168,7 +163,7 @@
     </div>
 
     <div id="is_sterilizated_related_inputs">
-        <div class="form-group date" id="sterilization_date" data-date-format="yyyy-mm-dd">
+        <div class="form-group date" id="sterilization_date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
             <label for="sterilization_date" class="col-sm-3 control-label">Data da Esterilização</label>
 
             <div class="col-sm-9">
@@ -208,7 +203,7 @@
     </div>
 
     <div id="is_dead_related_inputs">
-        <div class="form-group date" id="death_date" data-date-format="yyyy-mm-dd">
+        <div class="form-group date" id="death_date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
             <label for="death_date" class="col-sm-3 control-label">Data do Falecimento</label>
 
             <div class="col-sm-9">
