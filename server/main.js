@@ -44,7 +44,7 @@ app.get('/r/adoptableAnimals', function (req, res) {
 });
 
 app.get('/r/animals', function (req, res) {
-    var sql = 'select id, name, species, gender, breed, year_of_birth, size, color, physical_state, emotional_state,' +
+    var sql = 'select id, name, species, gender, breed, date_of_birth, size, color, physical_state, emotional_state,' +
         ' details, is_adoptable, is_adoptable_reason, received_by, received_from, received_date, received_reason,' +
         ' received_details, chip_code, is_sterilizated, sterilization_date, sterilization_by, sterilization_details,' +
         ' is_dead, death_date, death_reason' +

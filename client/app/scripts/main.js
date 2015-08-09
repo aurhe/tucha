@@ -29,7 +29,7 @@ var cellFormatters = {
     age: function (value) {
         'use strict';
         if (value && value !== 0) {
-            return new Date().getUTCFullYear() - value;
+            return new Date(new Date() - new Date(value)).getUTCFullYear() - 1970;
         } else {
             return '';
         }
@@ -62,6 +62,7 @@ var cellFormatters = {
             $('#received_date').datepicker();
             $('#sterilization_date').datepicker();
             $('#death_date').datepicker();
+            $('#date_of_birth').datepicker();
 
             $('#is_adoptable_yes').change(function () {
                 $('#is_adoptable_reason_related_inputs').hide();
@@ -100,7 +101,9 @@ var cellFormatters = {
                     $('#species').val(data.species);
                     $(data.gender === 0 ? '#male' : '#female').prop('checked', true);
                     $('#breed').val(data.breed);
-                    $('#year_of_birth').val(data.year_of_birth);
+                    if (!isNaN(Date.parse(data.date_of_birth))) {
+                        $('#date_of_birth').datepicker('setDate', new Date(data.date_of_birth));
+                    }
                     $('#size').val(data.size);
                     $('#color').val(data.color);
                     $('#physical_state').val(data.physical_state);
