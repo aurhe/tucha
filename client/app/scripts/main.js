@@ -26,6 +26,26 @@ var cellFormatters = {
             return 'Sim';
         }
     },
+    currentSituationHtml: function (value) {
+        'use strict';
+        switch (value) {
+            case "MISSING_FROM_SHELTER":
+                return "Desaparecido do abrigo";
+            case "MISSING_FROM_ADOPTER":
+                return "Desaparecido do adoptante";
+            case "FAT":
+                return "Família de Acolhimento Temporário (FAT)";
+            case "FAR":
+                return "Família de Acolhimento Remunerado (FAR)";
+            case "ADOPTED":
+                return "Adoptado";
+            case "DEAD":
+                return "Falecido";
+            case "IN_SHELTER":
+            default:
+                return "No abrigo";
+        }
+    },
     age: function (value) {
         'use strict';
         if (value && value !== '0000-00-00') {
@@ -74,6 +94,23 @@ var cellFormatters = {
         $('#state_details_' + state.position).val(state.details);
     }
 
+    function currentSituationAction() {
+        switch ($('#current_situation').val()) {
+            case 'MISSING_FROM_SHELTER':
+            case 'MISSING_FROM_ADOPTER':
+                $('#is_missing_related_inputs').show();
+                $('#is_dead_related_inputs').hide();
+                break;
+            case 'DEAD':
+                $('#is_missing_related_inputs').hide();
+                $('#is_dead_related_inputs').show();
+                break;
+            default:
+                $('#is_missing_related_inputs').hide();
+                $('#is_dead_related_inputs').hide();
+        }
+    }
+
     function loadAnimal(id) {
         var statesCount = 0;
 
@@ -94,12 +131,7 @@ var cellFormatters = {
                 $('#is_sterilizated_related_inputs').hide();
             });
 
-            $('#is_dead_yes').change(function () {
-                $('#is_dead_related_inputs').show();
-            });
-            $('#is_dead_no').change(function () {
-                $('#is_dead_related_inputs').hide();
-            });
+            $('#current_situation').change(currentSituationAction);
 
             if (id === 'new') {
                 // set defaults
@@ -109,8 +141,8 @@ var cellFormatters = {
                 $('#is_adoptable_reason_related_inputs').hide();
                 $('#is_sterilizated_no').prop('checked', true);
                 $('#is_sterilizated_related_inputs').hide();
-                $('#is_dead_no').prop('checked', true);
-                $('#is_dead_related_inputs').hide();
+
+                currentSituationAction();
             } else {
                 $.get('/r/animal/' + id, null, function (data) {
                     $('#name').val(data.name);
@@ -153,17 +185,15 @@ var cellFormatters = {
                     }
                     $('#sterilization_details').val(data.sterilization_details);
 
-                    if (data.is_dead === 0) {
-                        $('#is_dead_no').prop('checked', true);
-                        $('#is_dead_related_inputs').hide();
-                    } else {
-                        $('#is_dead_yes').prop('checked', true);
-                        $('#is_dead_related_inputs').show();
-                    }
+                    $('#current_situation').val(data.current_situation);
+
+                    $('#missing_details').val(data.missing_details);
                     if (!isNaN(Date.parse(data.death_date))) {
                         $('#death_date').datepicker('setDate', new Date(data.death_date));
                     }
                     $('#death_reason').val(data.death_reason);
+
+                    currentSituationAction();
                 }, 'json');
 
                 $.get('/r/animal/' + id + '/states', null, function (data) {

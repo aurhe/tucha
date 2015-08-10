@@ -184,13 +184,28 @@
     </div>
 
     <div class="form-group">
-        <label for="is_dead" class="col-sm-3 control-label">Falecido</label>
+        <label for="current_situation" class="col-sm-3 control-label">Situação Actual</label>
 
-        <div class="col-sm-2 radio">
-            <label><input type="radio" name="is_dead" id="is_dead_yes" value="1" checked>Sim</label>
+        <div class="col-sm-9">
+            <select class="form-control" id="current_situation" name="current_situation">
+                <option value="IN_SHELTER">No abrigo</option>
+                <option value="MISSING_FROM_SHELTER">Desaparecido do abrigo</option>
+                <option value="MISSING_FROM_ADOPTER">Desaparecido do adoptante</option>
+                <option value="FAT">Família de Acolhimento Temporário (FAT)</option>
+                <option value="FAR">Família de Acolhimento Remunerado (FAR)</option>
+                <option value="ADOPTED">Adoptado</option>
+                <option value="DEAD">Falecido</option>
+            </select>
         </div>
-        <div class="col-sm-2 radio">
-            <label><input type="radio" name="is_dead" id="is_dead_no" value="0">Não</label>
+    </div>
+
+    <div id="is_missing_related_inputs">
+        <div class="form-group">
+            <label for="missing_details" class="col-sm-3 control-label">Detalhes do Desaparecimento</label>
+
+            <div class="col-sm-9">
+                <textarea id="missing_details" name="missing_details" class="form-control" rows="3"></textarea>
+            </div>
         </div>
     </div>
 
