@@ -33,12 +33,14 @@
         <th data-field="sterilization_date" data-sortable="true" data-visible="false">Data da Esterilização</th>
         <th data-field="sterilization_by" data-sortable="true" data-visible="false">Esterilizado por</th>
         <th data-field="sterilization_details" data-sortable="true" data-visible="false">Detalhes da Esterilização</th>
-        <th data-field="is_dead" data-sortable="true" data-visible="false" data-formatter="cellFormatters.truthyHtml">
-            Falecido
+        <th data-field="current_situation" data-sortable="true" data-visible="true"
+            data-formatter="cellFormatters.currentSituationHtml">
+            Situação Actual
         </th>
+        <th data-field="#missing_details" data-sortable="true" data-visible="false">Detalhes do Desaparecimento</th>
         <th data-field="death_date" data-sortable="true" data-visible="false">Data do Falecimento</th>
         <th data-field="death_reason" data-sortable="true" data-visible="false">Motivo do Falecimento</th>
-        <th data-field="details" data-sortable="true">Detalhes</th>
+        <th data-field="details" data-sortable="true" data-visible="false">Detalhes</th>
         <th data-field="id" data-width="90" data-formatter="cellFormatters.editButtonHtml" data-switchable="false"></th>
     </tr>
     </thead>

@@ -54,7 +54,7 @@ app.get('/r/animals', function (req, res) {
     var sql = 'select id, name, species, gender, breed, date_of_birth, size, color,' +
         ' details, is_adoptable, is_adoptable_reason, received_by, received_from, received_date,' +
         ' received_details, chip_code, is_sterilizated, sterilization_date, sterilization_by, sterilization_details,' +
-        ' is_dead, death_date, death_reason' +
+        ' current_situation, missing_details, death_date, death_reason' +
         ' from tucha.animal where is_deleted is null';
     console.log(sql);
     connection.query(sql, function (err, rows) {
