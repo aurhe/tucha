@@ -146,6 +146,7 @@ var cellFormatters = {
             } else {
                 $.get('/r/animal/' + id, null, function (data) {
                     $('#name').val(data.name);
+                    $('#code').val(data.code);
                     $('#species').val(data.species);
                     $(data.gender === 0 ? '#male' : '#female').prop('checked', true);
                     $('#breed').val(data.breed);
