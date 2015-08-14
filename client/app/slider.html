@@ -7,14 +7,13 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
+    <!-- build:css(.) styles/slider_vendor.css -->
     <!-- bower:css -->
-
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" type="text/css" href="bower_components/slick-carousel/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="bower_components/slick-carousel/slick/slick-theme.css"/>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/slider.css -->
     <link rel="stylesheet" href="styles/slider.css">
     <!-- endbuild -->
 </head>
@@ -24,14 +23,17 @@
     <p class="adopt-text">Adopte <span id="dog-gender">o</span></p>
 
     <div id="dog-name"><span>Farrusco!</span></div>
-    <p class="phone-number"><a href="tel:000">000 000 000</a></p>
 
-    <p class="email-address"><a href="mailto:example@example.com">example@example.com</a></p>
+    <div class="contacts">
+        <p class="phone-number"><a href="tel:000">000 000 000</a></p>
+
+        <p class="email-address"><a href="mailto:example@example.com">example@example.com</a></p>
+    </div>
 </div>
 <div class="slider"></div>
 <div class="nav-slider"></div>
 
-<!-- build:js(.) scripts/vendor.js -->
+<!-- build:js(.) scripts/slider_vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
@@ -57,7 +59,7 @@
     ga('send', 'pageview');
 </script>
 
-<!-- build:js({app,.tmp}) scripts/main.js -->
+<!-- build:js({app,.tmp}) scripts/slider.js -->
 <script src="scripts/slider.js"></script>
 <!-- endbuild -->
 </body>
