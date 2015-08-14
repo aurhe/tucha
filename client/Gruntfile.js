@@ -221,8 +221,8 @@ module.exports = function (grunt) {
                         '<%= config.dist %>/scripts/{,*/}*.js',
                         '<%= config.dist %>/styles/{,*/}*.css',
                         '<%= config.dist %>/images/{,*/}*.*',
-                        '<%= config.dist %>/styles/fonts/{,*/}*.*',
-                        '<%= config.dist %>/*.{ico,png}'
+                        '<%= config.dist %>/styles/fonts/{,*/}*.*'
+                        //'<%= config.dist %>/*.{ico,png}'
                     ]
                 }
             }
@@ -235,7 +235,10 @@ module.exports = function (grunt) {
             options: {
                 dest: '<%= config.dist %>'
             },
-            html: '<%= config.app %>/index.html'
+            html: [
+                '<%= config.app %>/index.html',
+                '<%= config.app %>/slider.html'
+            ]
         },
 
         // Performs rewrites based on rev and the useminPrepare configuration
@@ -343,8 +346,27 @@ module.exports = function (grunt) {
                     expand: true,
                     dot: true,
                     cwd: '.',
-                    src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
-                    dest: '<%= config.dist %>'
+                    flatten: true,
+                    src: [
+                        'bower_components/slick-carousel/slick/fonts/*'
+                    ],
+                    dest: '<%= config.dist %>/styles/fonts/'
+                }, {
+                    expand: true,
+                    dot: true,
+                    cwd: '.',
+                    flatten: true,
+                    src: [
+                        'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*'
+                    ],
+                    dest: '<%= config.dist %>/fonts/'
+                }, {
+                    expand: true,
+                    dot: true,
+                    cwd: '.',
+                    flatten: true,
+                    src: 'bower_components/slick-carousel/slick/ajax-loader.gif',
+                    dest: '<%= config.dist %>/styles/'
                 }]
             },
             styles: {

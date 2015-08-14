@@ -49,6 +49,8 @@
             });
             fillDogName(0);
 
+            $('.slider').slick('slickPlay');
+
         }, 'json');
 
     });

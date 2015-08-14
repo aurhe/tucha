@@ -1,10 +1,15 @@
 @font-face {
     font-family: texgyreadventor;
-    src: local(texgyreadventor), url('texgyreadventor-bold.otf') format('opentype');
+    src: local(texgyreadventor), url('fonts/texgyreadventor-bold.otf') format('opentype');
+}
+
+html {
+    overflow: hidden;
 }
 
 body {
     //background-color: black;
+    margin: 0;
     font-family: "texgyreadventor", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
 
@@ -72,26 +77,31 @@ body {
         margin-right: 20px;
     }
 
-    p {
+    .contacts {
+        border: solid;
+        margin-top: 78px;
+        margin-left: 10px;
+        margin-right: 10px;
 
-        a {
-            color: #435A8D;
-            font-size: 20px;
-        }
-
-        &.phone-number {
-            margin-top: 50px;
-
+        p {
             a {
-                font-size: 35px;
+                color: #435A8D;
+                font-size: 20px;
             }
-        }
 
-        &.email-address {
-            //margin-top: 10%;
+            &.phone-number {
+                a {
+                    text-decoration: none;
+                    font-size: 40px;
+                }
+            }
 
-            a {
-                font-size: 16px;
+            &.email-address {
+                //margin-top: 10%;
+                a {
+                    text-decoration: none;
+                    font-size: 16px;
+                }
             }
         }
     }

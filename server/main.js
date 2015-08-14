@@ -41,7 +41,8 @@ app.use(express.static('public'));
 //rest
 
 app.get('/r/adoptableAnimals', function (req, res) {
-    var sql = 'select id,name,gender from tucha.animal where is_adoptable=true and is_dead=false and ' +
+    var sql = 'select id,name,gender from tucha.animal where is_adoptable=true and ' +
+        '(current_situation="IN_SHELTER" or current_situation="FAT" or current_situation="FAR") and ' +
         'picture_thumbnail is not null and is_deleted is null';
     console.log(sql);
     connection.query(sql, function (err, rows) {
@@ -167,7 +168,7 @@ app.post('/r/animal/:id', urlencodedParser, function (req, res) {
 
     for (var i = 0; i < keys.length; i++) {
         if (keys[i].indexOf('state_date_') !== -1) {
-            id = Number.parseInt(keys[i].substr(11), 10);
+            id = parseInt(keys[i].substr(11), 10);
             states[id] = {
                 date: data['state_date_' + id],
                 details: data['state_details_' + id],
@@ -176,7 +177,7 @@ app.post('/r/animal/:id', urlencodedParser, function (req, res) {
             delete data['state_date_' + id];
         }
         if (keys[i].indexOf('state_details_') !== -1) {
-            id = Number.parseInt(keys[i].substr(14), 10);
+            id = parseInt(keys[i].substr(14), 10);
             delete data['state_details_' + id];
         }
     }
