@@ -206,6 +206,13 @@ app.post('/r/animal/:id', urlencodedParser, function (req, res) {
     });
 });
 
+app.delete('/r/animal/:id', function (req, res) {
+    connection.query('update tucha.animal set is_deleted=true where id=' + mysql.escape(req.params.id), function (err) {
+        logQueryError(err);
+        res.end();
+    });
+});
+
 // app.listen(process.env.OPENSHIFT_NODEJS_PORT, process.env.OPENSHIFT_NODEJS_IP);
 
 app.listen(3000);

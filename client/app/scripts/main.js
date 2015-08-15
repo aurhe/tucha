@@ -29,21 +29,20 @@ var cellFormatters = {
     currentSituationHtml: function (value) {
         'use strict';
         switch (value) {
-            case "MISSING_FROM_SHELTER":
-                return "Desaparecido do abrigo";
-            case "MISSING_FROM_ADOPTER":
-                return "Desaparecido do adoptante";
-            case "FAT":
-                return "Família de Acolhimento Temporário (FAT)";
-            case "FAR":
-                return "Família de Acolhimento Remunerado (FAR)";
-            case "ADOPTED":
-                return "Adoptado";
-            case "DEAD":
-                return "Falecido";
-            case "IN_SHELTER":
+            case 'MISSING_FROM_SHELTER':
+                return 'Desaparecido do abrigo';
+            case 'MISSING_FROM_ADOPTER':
+                return 'Desaparecido do adoptante';
+            case 'FAT':
+                return 'Família de Acolhimento Temporário (FAT)';
+            case 'FAR':
+                return 'Família de Acolhimento Remunerado (FAR)';
+            case 'ADOPTED':
+                return 'Adoptado';
+            case 'DEAD':
+                return 'Falecido';
             default:
-                return "No abrigo";
+                return 'No abrigo';
         }
     },
     age: function (value) {
@@ -142,6 +141,8 @@ var cellFormatters = {
                 $('#is_sterilizated_no').prop('checked', true);
                 $('#is_sterilizated_related_inputs').hide();
 
+                $('#delete-button').hide();
+
                 currentSituationAction();
             } else {
                 $.get('/r/animal/' + id, null, function (data) {
@@ -195,6 +196,17 @@ var cellFormatters = {
                     $('#death_reason').val(data.death_reason);
 
                     currentSituationAction();
+
+                    $('#delete-button').click(function () {
+                        $.ajax({
+                            url: '/r/animal/' + id,
+                            type: 'DELETE',
+                            success: function () {
+                                window.location = '/#';
+                            }
+                        });
+
+                    });
                 }, 'json');
 
                 $.get('/r/animal/' + id + '/states', null, function (data) {
