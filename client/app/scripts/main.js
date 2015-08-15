@@ -89,7 +89,7 @@ var cellFormatters = {
             '</div>' +
             '</div>'
         );
-        $('#state_' + state.position).datepicker('setDate', state.date);
+        $('#state_' + state.position).datepicker('setDate', new Date(state.date));
         $('#state_details_' + state.position).val(state.details);
     }
 
