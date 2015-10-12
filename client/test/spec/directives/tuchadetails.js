@@ -3,7 +3,7 @@
 describe('Directive: tuchaDetails', function () {
 
   // load the directive's module
-  beforeEach(module('client2App'));
+  beforeEach(module('tucha'));
 
   var element,
     scope;
