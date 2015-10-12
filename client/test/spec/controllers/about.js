@@ -3,7 +3,7 @@
 describe('Controller: AboutCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('client2App'));
+  beforeEach(module('tucha'));
 
   var AboutCtrl,
     scope;

@@ -3,7 +3,7 @@
 describe('Service: states', function () {
 
   // load the service's module
-  beforeEach(module('client2App'));
+  beforeEach(module('tucha'));
 
   // instantiate service
   var states;
