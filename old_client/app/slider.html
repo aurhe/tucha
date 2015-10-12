@@ -1,0 +1,66 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>abrigo</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/slider_vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" type="text/css" href="bower_components/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="bower_components/slick-carousel/slick/slick-theme.css"/>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/slider.css -->
+    <link rel="stylesheet" href="styles/slider.css">
+    <!-- endbuild -->
+</head>
+<body>
+
+<div class="slider-text">
+    <p class="adopt-text">Adopte <span id="dog-gender">o</span></p>
+
+    <div id="dog-name"><span>Farrusco!</span></div>
+
+    <div class="contacts">
+        <p class="phone-number"><a href="tel:931328664">931 328 664</a></p>
+
+        <p class="email-address"><a href="mailto:amigosanimaismira@gmail.com">amigosanimaismira@gmail.com</a></p>
+    </div>
+</div>
+<div class="slider"></div>
+<div class="nav-slider"></div>
+
+<!-- build:js(.) scripts/slider_vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/slick-carousel/slick/slick.min.js"></script>
+<script src="bower_components/jquery-textfill/source/jquery.textfill.min.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- Google Analytics -->
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-3596121-3', 'auto');
+    ga('send', 'pageview');
+</script>
+
+<!-- build:js({app,.tmp}) scripts/slider.js -->
+<script src="scripts/slider.js"></script>
+<!-- endbuild -->
+</body>
+</html>

@@ -1,0 +1,93 @@
+<div class="form-group">
+    <label for="picture" class="col-sm-3 control-label text-right"></label>
+
+    <div class="col-sm-8">
+        <img ng-src="/r/animal/{{details.id}}/thumbnail?{{currentTime}}" class="pull-left"/>
+        <input ng-if="editable" type="file" id="picture" name="picture" class="col-sm-10"
+               onchange="angular.element(this).scope().submitPicture(this.files)"/>
+    </div>
+</div>
+<tucha-text label="Código" editable="editable" model="details" name="code"></tucha-text>
+<tucha-text label="Nome" editable="editable" model="details" name="name"></tucha-text>
+<tucha-text label="Espécie" editable="editable" model="details" name="species"></tucha-text>
+<tucha-boolean label="Sexo" editable="editable" model="details" name="gender" no-label="Macho"
+               yes-label="Fêmea"></tucha-boolean>
+<tucha-text label="Raça" editable="editable" model="details" name="breed"></tucha-text>
+<tucha-date label="Data de Nascimento" editable="editable" model="details" name="date_of_birth"></tucha-date>
+<tucha-text label="Tamanho" editable="editable" model="details" name="size"></tucha-text>
+<tucha-text label="Cor" editable="editable" model="details" name="color"></tucha-text>
+<div ng-if="editable" class="form-group">
+    <label class="col-sm-3 control-label">Estado</label>
+
+    <div class="col-sm-9">
+        <button class="btn btn-default glyphicon glyphicon-plus" ng-click="addState()"> Adicionar Estado</button>
+    </div>
+</div>
+<div ng-if="editable" class="form-group" ng-repeat="state in details.states">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3">
+        <div class="input-group">
+            <input type="datetime" class="form-control" id="state_{{state.position}}"
+                   date-time ng-model="state.date" view="date" min-view="date" format="dd-MM-yyyy">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openStateDatePicker($index)">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" ng-model="state.details">
+    </div>
+</div>
+<div ng-if="!editable" class="form-group">
+    <label class="col-sm-3 control-label">Estado</label>
+
+    <div ng-repeat="state in details.states">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            {{state.date | date:'dd-MM-yyyy'}} {{state.details}}
+        </div>
+    </div>
+</div>
+<tucha-details label="Detalhes" editable="editable" model="details" name="details"></tucha-details>
+<tucha-boolean label="Apotável" editable="editable" model="details" name="is_adoptable"></tucha-boolean>
+<tucha-details ng-if="details.is_adoptable == 0" label="Motivo da não adoptabilidade" editable="editable"
+               model="details"
+               name="is_adoptable_reason"></tucha-details>
+<!--<tucha-text label="Recevido por" editable="editable" model="details" name="received_by"></tucha-text>-->
+<!--<tucha-text label="Recebido de" editable="editable" model="details" name="received_from"></tucha-text>-->
+<tucha-date label="Data de Recebimento" editable="editable" model="details" name="received_date"></tucha-date>
+<tucha-text label="Código do Chip" editable="editable" model="details" name="chip_code"></tucha-text>
+<tucha-boolean label="Esterilizado" editable="editable" model="details" name="is_sterilizated"></tucha-boolean>
+<tucha-date ng-if="details.is_sterilizated == 1" label="Data de Esterilizamento" editable="editable" model="details"
+            name="sterilization_date"></tucha-date>
+<!--<tucha-text label="Esterliziado por" editable="editable" model="details" name="sterilization_by"></tucha-text>-->
+<tucha-details ng-if="details.is_sterilizated == 1" label="Detalhes do esterilizamento" editable="editable"
+               model="details"
+               name="sterilization_details"></tucha-details>
+<div class="form-group">
+    <label for="current_situation" class="col-sm-3 control-label text-right">Situação actual</label>
+
+    <div class="col-sm-5">
+        <select ng-if="editable" class="form-control" ng-model="details.current_situation" id="current_situation">
+            <option value="IN_SHELTER">No abrigo</option>
+            <option value="MISSING_FROM_SHELTER">Desaparecido do abrigo</option>
+            <option value="MISSING_FROM_ADOPTER">Desaparecido do adoptante</option>
+            <option value="FAT">Família de Acolhimento Temporário (FAT)</option>
+            <option value="FAR">Família de Acolhimento Remunerado (FAR)</option>
+            <option value="ADOPTED">Adoptado</option>
+            <option value="OWNER">Entregue ao Dono</option>
+            <option value="DEAD">Falecido</option>
+        </select>
+
+        <p ng-if="!editable" class="form-control-static">{{details.current_situation | tuchaCurrentSituation}}</p>
+    </div>
+</div>
+<tucha-details
+        ng-if="details.current_situation === 'MISSING_FROM_SHELTER' || details.current_situation === 'MISSING_FROM_ADOPTER'"
+        label="Detalhes do Desaparecimento" editable="editable" model="details" name="missing_details"></tucha-details>
+<tucha-date ng-if="details.current_situation === 'DEAD'"
+            label="Data do falecimento" editable="editable" model="details" name="death_date"></tucha-date>
+<tucha-details ng-if="details.current_situation === 'DEAD'"
+               label="Motivo do Falecimento" editable="editable" model="details" name="death_reason"></tucha-details>
