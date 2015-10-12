@@ -1,0 +1,16 @@
+<div class="form-group">
+    <label for="{{name}}" class="col-sm-3 control-label text-right">{{label}}</label>
+
+    <div class="col-sm-4">
+        <div ng-if="editable" class="input-group">
+            <input type="datetime" class="form-control" id="{{name}}"
+                   date-time ng-model="model[name]" view="date" min-view="date" format="dd-MM-yyyy">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open()">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+            </span>
+        </div>
+        <p ng-if="!editable" class="form-control-static">{{model[name] | date:'dd-MM-yyyy'}}</p>
+    </div>
+</div>

@@ -37,7 +37,12 @@ body {
     }
 
     img {
-        width: 100%;
+        //width: 100%;
+    }
+
+    .slick-list .slick-slide img {
+        height: 450px;
+        display: inline-block;
     }
 }
 

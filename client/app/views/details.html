@@ -1,0 +1,20 @@
+<h1 ng-if="details.code || details.name" class="page-header">{{details.code}} {{details.name}}</h1>
+<h1 ng-if="!details.code && !details.name" class="page-header">{{title}}</h1>
+<div class="form-horizontal" ng-include="template"></div>
+<div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+        <button ng-if="!editable" type="button" ng-click="edit()" class="btn btn-primary glyphicon glyphicon-pencil">
+            Editar
+        </button>
+        <button ng-if="editable" type="button" ng-click="submit($event)" class="btn btn-primary glyphicon glyphicon-ok">
+            Gravar
+        </button>
+        <button ng-if="editable" type="button" ng-click="cancel()"
+                class="btn btn-default cancel-button glyphicon glyphicon-remove">
+            Cancelar
+        </button>
+        <button ng-if="entityId !== 'new'" type="button" type="button" ng-click="delete()"
+                class="btn btn-danger pull-right glyphicon glyphicon-trash"> Apagar
+        </button>
+    </div>
+</div>
