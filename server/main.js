@@ -93,6 +93,17 @@ function saveState(state) {
         });
 }
 
+app.get('/r/adoptableAnimals', function (req, res) { // used in the slider
+    var sql = 'select id,name,gender from tucha.animal where is_adoptable=true and ' +
+        '(current_situation="IN_SHELTER" or current_situation="FAT" or current_situation="FAR") and ' +
+        'picture_thumbnail is not null and is_deleted is null';
+    console.log(sql);
+    connection.query(sql, function (err, rows) {
+        logQueryError(err);
+        res.json(rows);
+    });
+});
+
 var selects = {
     animal: 'select id, code, name, species, gender, breed, date_of_birth, size, color,' +
     ' details, is_adoptable, is_adoptable_reason, received_by, received_from, received_date,' +
@@ -191,17 +202,6 @@ app.delete('/r/:entity/:id', function (req, res) {
     connection.query(sql, function (err) {
         logQueryError(err);
         res.end();
-    });
-});
-
-app.get('/r/adoptableAnimals', function (req, res) {
-    var sql = 'select id,name,gender from tucha.animal where is_adoptable=true and ' +
-        '(current_situation="IN_SHELTER" or current_situation="FAT" or current_situation="FAR") and ' +
-        'picture_thumbnail is not null and is_deleted is null';
-    console.log(sql);
-    connection.query(sql, function (err, rows) {
-        logQueryError(err);
-        res.json(rows);
     });
 });
 
