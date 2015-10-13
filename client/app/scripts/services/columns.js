@@ -3,7 +3,20 @@
 angular.module('tucha')
     .constant('columns', {
         id: {field: 'id', name: 'Id', visible: false},
-        code: {field: 'code', name: 'Código', width: 100},
+        code: {
+            field: 'code', name: 'Código', width: 100, sort: {direction: 'asc'},
+            sortingAlgorithm: function (a, b) {
+                if (a === null || a === '') {
+                    return 1;
+                } else if (b === null || b === '') {
+                    return -1;
+                } else if (a.match(/\d+/) === null || b.match(/\d+/) === null) {
+                    return a.localeCompare(b);
+                } else {
+                    return parseInt(a.match(/\d+/)[0], 10) > parseInt(b.match(/\d+/)[0], 10);
+                }
+            }
+        },
         name: {field: 'name', name: 'Nome', minWidth: 100},
         species: {field: 'species', name: 'Espécie', width: 50},
         gender: {
