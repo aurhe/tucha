@@ -13,7 +13,7 @@ angular.module('tucha')
                 } else if (a.match(/\d+/) === null || b.match(/\d+/) === null) {
                     return a.localeCompare(b);
                 } else {
-                    return parseInt(a.match(/\d+/)[0], 10) > parseInt(b.match(/\d+/)[0], 10);
+                    return parseInt(a.match(/\d+/)[0], 10) > parseInt(b.match(/\d+/)[0], 10) ? 1 : -1;
                 }
             }
         },
