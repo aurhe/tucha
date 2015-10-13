@@ -26,6 +26,7 @@ body {
 
     .slick-prev,
     .slick-next {
+        z-index: 100;
         width: 60px;
         height: 60px;
     }
@@ -42,7 +43,8 @@ body {
 
     .slick-list .slick-slide img {
         height: 450px;
-        display: inline-block;
+        margin: auto;
+        display: block;
     }
 }
 
