@@ -415,6 +415,41 @@ module.exports = function (grunt) {
           cwd: '.',
           src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
           dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '.',
+          flatten: true,
+          src: [
+            'bower_components/slick-carousel/slick/fonts/*'
+          ],
+          dest: '<%= yeoman.dist %>/styles/fonts/'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '.',
+          flatten: true,
+          src: [
+            'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*'
+          ],
+          dest: '<%= yeoman.dist %>/styles/fonts/'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '.',
+          flatten: true,
+          src: [
+            'bower_components/angular-ui-grid/ui-grid.ttf',
+            'bower_components/angular-ui-grid/ui-grid.woff'
+          ],
+          dest: '<%= yeoman.dist %>/styles/'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '.',
+          flatten: true,
+          src: 'bower_components/slick-carousel/slick/ajax-loader.gif',
+          dest: '<%= yeoman.dist %>/styles/'
         }]
       },
       styles: {
