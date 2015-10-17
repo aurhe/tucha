@@ -137,6 +137,12 @@ body {
     }
   }
 
+  .read-only {
+    .form-group {
+      margin-bottom: 0px;
+    }
+  }
+
   .typeahead {
     .list-group {
       position: absolute;
