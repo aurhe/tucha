@@ -7,7 +7,21 @@ angular
         'datePicker',
         'ui.grid'
     ])
-    .config(function ($routeProvider, states) {
+    .config(function ($httpProvider, $routeProvider, states) {
+        $httpProvider.defaults.withCredentials = true;
+
+        $httpProvider.interceptors.push(function ($q, $location) {
+            return {
+                response: function (response) {
+                    return response;
+                }, responseError: function (response) {
+                    if (response.status === 401) {
+                        $location.url('/login');
+                    }
+                    return $q.reject(response);
+                }
+            };
+        });
 
         for (var i = 0; i < states.length; i++) {
             $routeProvider
@@ -22,6 +36,10 @@ angular
         }
 
         $routeProvider
+            .when('/login', {
+                templateUrl: 'views/login.html',
+                controller: 'LoginCtrl'
+            })
             .otherwise({
                 redirectTo: '/animal'
             });

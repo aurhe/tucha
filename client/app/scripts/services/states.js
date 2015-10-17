@@ -22,6 +22,6 @@ angular.module('tucha')
         {name: 'medicamentUsed', title: 'Medicamentos Usados', icon: 'glyphicon-minus'},
         //{name: 'medicamentSupplier', title: 'Fornecedores Medicamentos', icon: 'glyphicon-th-list'},
         {name: 'host', title: 'Família de Acolhimento', icon: 'glyphicon-home'},
-        {name: 'state', title: 'Estados', icon: 'glyphicon-th-list'}
-        //{name: 'user', title: 'Users', icon: 'glyphicon-th-list'}
+        {name: 'state', title: 'Estados', icon: 'glyphicon-th-list'},
+        {name: 'user', title: 'Users', icon: 'glyphicon-user'}
     ]);
