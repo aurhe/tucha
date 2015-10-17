@@ -105,6 +105,12 @@ body {
 
   .page-header {
     margin-top: 0;
+    color: #337ab7;
+
+    .glyphicon {
+      font-size: 30px;
+      margin-right: 10px;
+    }
   }
 
   .grid {
