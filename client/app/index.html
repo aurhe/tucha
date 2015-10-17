@@ -38,8 +38,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <form class="navbar-form navbar-left" role="login">
-                    <a class="btn btn-primary" href="#" role="button">Login</a>
+                <form ng-if="!login" class="navbar-form navbar-left" role="logout">
+                    <a class="btn btn-primary" href="#/changePassword" role="button">Change Password</a>
+                    <a class="btn btn-primary" href="/r/logout" role="button">Logout</a>
                 </form>
             </ul>
         </div>
@@ -47,7 +48,7 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div ng-if="!login" class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li ng-repeat="state in states" ng-class="{'active': state.active}">
                     <a ng-href="/#/{{state.name}}">
@@ -55,7 +56,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="main" ng-class="{'col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2': !login}">
             <div ng-view=""></div>
         </div>
     </div>
@@ -97,6 +98,7 @@
 <script src="scripts/services/columns.js"></script>
 <script src="scripts/controllers/details.js"></script>
 <script src="scripts/controllers/grid.js"></script>
+<script src="scripts/controllers/login.js"></script>
 <script src="scripts/directives/tuchatext.js"></script>
 <script src="scripts/directives/tuchadetails.js"></script>
 <script src="scripts/directives/tuchaboolean.js"></script>

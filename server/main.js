@@ -1,37 +1,109 @@
 #!/usr/bin/env node
-
 'use strict';
 
-//var dropbox = require('dropbox');
+var config = {
+    nodeIp: '127.0.0.1',
+    nodePort: 3000,
+    dbHost: '127.0.0.1',
+    dbPort: '3306',
+    dbUser: 'root',
+    dbPassword: 'mysql',
+    sessionSecret: 'sessionSecret'
+};
+
+// database connection
 var mysql = require('mysql');
 var jimp = require('jimp');
-
 var connection = mysql.createConnection({
-    host: '127.0.0.1',
-    port: '3306',
-    user: 'root',
-    password: 'mysql'
+    host: config.dbHost,
+    port: config.dbPort,
+    user: config.dbUser,
+    password: config.dbPassword
 });
-
 connection.connect();
 
 var express = require('express');
-
 var app = express();
-//var urlencodedParser = bodyParser.urlencoded({
-//    extended: false
-//});
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-var multer = require('multer'); // parse file uploads
+// parse file uploads
+var multer = require('multer');
 app.use(multer({
     inMemory: true,
     includeEmptyFields: true
 }));
+
+// authentication stuff
+var passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
+    bcrypt = require('bcrypt-nodejs');
+
+passport.use(new LocalStrategy(
+    function (username, password, done) {
+        connection.query('select password_hash from tucha.user where username=' + mysql.escape(username), function (err, rows) {
+            if (err) {
+                return done(err);
+            } else if (rows.length === 0) {
+                return done(null, false);
+            } else if (bcrypt.compareSync(password, rows[0].password_hash)) {
+                return done(null, {username: username, password: password});
+            } else {
+                return done(null, false);
+            }
+        });
+    }
+));
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+passport.deserializeUser(function (user, done) {
+    done(null, user);
+});
+app.use(express.static('public'));
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(session({secret: config.sessionSecret}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.post('/r/login',
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/#/login',
+        failureFlash: true
+    })
+);
+
+app.get('/r/logout', function (req, res) {
+    req.logout();
+    res.redirect('/#/login');
+});
+
+function auth(req, res, next) {
+    if (!req.isAuthenticated()) {
+        res.send(401);
+    } else {
+        next();
+    }
+}
+
+function query(sql, res) {
+    console.log(sql);
+    connection.query(sql, function (err, rows) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.json(rows);
+    });
+}
 
 function logQueryError(err) {
     if (err) {
@@ -39,10 +111,6 @@ function logQueryError(err) {
     }
 }
 
-// respond to static files requests
-app.use(express.static('public'));
-
-// respond to rest requests
 function storeImage(id, buffer, callback) {
     new jimp(buffer, function (err, image) {
         var w = image.bitmap.width,
@@ -201,51 +269,35 @@ var selects = {
 };
 
 // data for slider
-app.get('/r/adoptableAnimals', function (req, res) { // used in the slider
-    var sql = selects[req.params.entity].adoptableAnimals;
-    console.log(sql);
-    connection.query(sql, function (err, rows) {
-        logQueryError(err);
-        res.json(rows);
-    });
+app.get('/r/adoptableAnimals', function (req, res) { // used in the slider, must no check authentication
+    query(selects[req.params.entity].adoptableAnimals, res);
 });
 
 // get grid
-app.get('/r/:entity', function (req, res) {
-    var sql = selects[req.params.entity].details;
-    console.log(sql);
-    connection.query(sql, function (err, rows) {
-        logQueryError(err);
-        console.log(rows);
-        res.json(rows);
-    });
+app.get('/r/:entity', auth, function (req, res) {
+    query(selects[req.params.entity].details, res);
 });
 
 // get dropdown data
-app.get('/r/dropdown/:entity', function (req, res) {
-    var sql = selects[req.params.entity].dropdown;
-    console.log(sql);
-    connection.query(sql, function (err, rows) {
-        logQueryError(err);
-        console.log(rows);
-        res.json(rows);
-    });
+app.get('/r/dropdown/:entity', auth, function (req, res) {
+    query(selects[req.params.entity].dropdown, res);
 });
 
 // get details
-app.get('/r/:entity/:id', function (req, res) {
-    //var sql = 'select * from tucha.' + req.params.entity + ' where id=' + mysql.escape(req.params.id);
+app.get('/r/:entity/:id', auth, function (req, res) {
     var sql = selects[req.params.entity].details + ' and id=' + mysql.escape(req.params.id);
     console.log(sql);
     connection.query(sql, function (err, rows) {
-        logQueryError(err);
-        console.log(rows[0]);
+        if (err) {
+            console.log(err);
+            return;
+        }
         res.json(rows[0]);
     });
 });
 
 // save details
-app.post('/r/:entity/:id', function (req, res) {
+app.post('/r/:entity/:id', auth, function (req, res) {
     var sql, entity = selects[req.params.entity].entity, data = req.body, states = null;
 
     if (req.params.id === 'new') {
@@ -279,17 +331,12 @@ app.post('/r/:entity/:id', function (req, res) {
 });
 
 // save details
-app.delete('/r/:entity/:id', function (req, res) {
-    var sql = 'update tucha.' + selects[req.params.entity].entity + ' set is_deleted=true where id=' + mysql.escape(req.params.id);
-    console.log(sql);
-    connection.query(sql, function (err) {
-        logQueryError(err);
-        res.end();
-    });
+app.delete('/r/:entity/:id', auth, function (req, res) {
+    query('update tucha.' + selects[req.params.entity].entity + ' set is_deleted=true where id=' + mysql.escape(req.params.id), res);
 });
 
 var emptyImage = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64'); // 1px gif
-app.get('/r/animal/:id/picture', function (req, res) {
+app.get('/r/animal/:id/picture', auth, function (req, res) {
     connection.query('select picture from tucha.animal where id=' + req.params.id, function (err, rows) {
         if (err || rows.length === 0 || rows[0].picture === null) {
             res.writeHead(200, {'Content-Type': 'image/gif'});
@@ -301,7 +348,7 @@ app.get('/r/animal/:id/picture', function (req, res) {
     });
 });
 
-app.post('/r/animal/:id/picture', function (req, res) {
+app.post('/r/animal/:id/picture', auth, function (req, res) {
     // store uploaded image
     if (typeof req.files.file !== 'undefined') { // image upload
         storeImage(mysql.escape(req.params.id), req.files.file.buffer, function () {
@@ -312,7 +359,7 @@ app.post('/r/animal/:id/picture', function (req, res) {
     }
 });
 
-app.get('/r/animal/:id/thumbnail', function (req, res) {
+app.get('/r/animal/:id/thumbnail', auth, function (req, res) {
     connection.query('select picture_thumbnail from tucha.animal where id=' + req.params.id, function (err, rows) {
         if (err || rows.length === 0 || rows[0].picture_thumbnail === null) {
             res.writeHead(200, {'Content-Type': 'image/gif'});
@@ -324,16 +371,9 @@ app.get('/r/animal/:id/thumbnail', function (req, res) {
     });
 });
 
-app.get('/r/animal/:id/states', function (req, res) {
-    connection.query('select date, details, position from tucha.state where animal=' + req.params.id +
-        ' order by position asc', function (err, rows) {
-        logQueryError(err);
-        res.json(rows);
-    });
+app.get('/r/animal/:id/states', auth, function (req, res) {
+    query('select date, details, position from tucha.state where animal=' + req.params.id +
+        ' order by position asc', res);
 });
 
-// app.listen(process.env.OPENSHIFT_NODEJS_PORT, process.env.OPENSHIFT_NODEJS_IP);
-
-app.listen(3000);
-
-// connection.end();
+app.listen(config.nodePort, config.nodeIp);
