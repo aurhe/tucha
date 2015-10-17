@@ -80,14 +80,6 @@ module.exports = function (grunt) {
                 context: '/r',
                 host: 'localhost',
                 port: 3000
-            }, {
-                context: '/loginRequest',
-                host: 'localhost',
-                port: 3000
-            }, {
-                context: '/logoutRequest',
-                host: 'localhost',
-                port: 3000
             }],
             livereload: {
                 options: {
