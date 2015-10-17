@@ -3,10 +3,11 @@
 angular.module('tucha')
     .controller('DetailsCtrl', function ($scope, $location, $routeParams, $http, $timeout, states) {
         var previousDetails;
-        var state = $location.path().split('/')[1];
+        var stateName = $location.path().split('/')[1];
 
         for (var i = 0; i < states.length; i++) {
-            if (states[i].name === state) {
+            if (states[i].name === stateName) {
+                $scope.state = states[i];
                 states[i].active = true;
                 $scope.title = states[i].title;
             } else {
@@ -15,21 +16,21 @@ angular.module('tucha')
         }
 
         $scope.currentTime = Date.now();
-        $scope.template = 'views/content/' + state + 'Details.html';
+        $scope.template = 'views/content/' + stateName + 'Details.html';
         $scope.entityId = $routeParams.id;
 
         if ($scope.entityId === 'new') {
             $scope.editable = true;
             $scope.details = {};
 
-            if (state === 'animal') {
+            if (stateName === 'animal') {
                 $scope.details.states = [];
             }
         } else {
             $scope.editable = false;
-            $http.get('/r/' + state + '/' + $scope.entityId).then(function (data) {
+            $http.get('/r/' + stateName + '/' + $scope.entityId).then(function (data) {
                 $scope.details = data.data;
-                if (state === 'animal') {
+                if (stateName === 'animal') {
                     $scope.details.states = [];
                     $http.get('/r/animal/' + $scope.entityId + '/states').then(function (data) {
                         $scope.details.states = data.data;
@@ -38,7 +39,7 @@ angular.module('tucha')
             });
         }
 
-        if (state === 'animal') {
+        if (stateName === 'animal') {
             $scope.addState = function () {
                 $scope.details.states.push({position: $scope.details.states.length, date: new Date(), details: ''});
             };
@@ -62,7 +63,7 @@ angular.module('tucha')
                 var fd = new FormData();
                 fd.append('file', files[0]);
 
-                $http.post('/r/' + state + '/' + id + '/picture', fd, {
+                $http.post('/r/' + stateName + '/' + id + '/picture', fd, {
                     withCredentials: true,
                     headers: {'Content-Type': undefined},
                     transformRequest: angular.identity
@@ -79,20 +80,20 @@ angular.module('tucha')
             $scope.editable = true;
         };
         $scope.submit = function () {
-            $http.post('/r/' + state + '/' + $scope.entityId, $scope.details).then(function (result) {
-                if (state === 'animal' && $scope.entityId === 'new') {
+            $http.post('/r/' + stateName + '/' + $scope.entityId, $scope.details).then(function (result) {
+                if (stateName === 'animal' && $scope.entityId === 'new') {
                     var files = angular.element('input[type=file]')[0].files;
 
                     if (files.length) {
                         $scope.submitPicture(files, result.data, function () {
-                            $location.path('/' + state + '/' + result.data);
+                            $location.path('/' + stateName + '/' + result.data);
                         });
                     } else {
-                        $location.path('/' + state + '/' + result.data);
+                        $location.path('/' + stateName + '/' + result.data);
                     }
                 } else {
                     if ($scope.entityId === 'new') {
-                        $location.path('/' + state + '/' + result.data);
+                        $location.path('/' + stateName + '/' + result.data);
                     } else {
                         $scope.editable = false;
                     }
@@ -104,8 +105,8 @@ angular.module('tucha')
             $scope.editable = false;
         };
         $scope.delete = function () {
-            $http.delete('/r/' + state + '/' + $scope.entityId).then(function () {
-                $location.path('/' + state);
+            $http.delete('/r/' + stateName + '/' + $scope.entityId).then(function () {
+                $location.path('/' + stateName);
             });
         };
     });

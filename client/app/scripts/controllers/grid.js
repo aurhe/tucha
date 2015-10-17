@@ -2,10 +2,11 @@
 
 angular.module('tucha')
     .controller('GridCtrl', function ($scope, $location, $http, $timeout, states, columns) {
-        var state = $location.path().split('/')[1];
+        var stateName = $location.path().split('/')[1];
 
         for (var i = 0; i < states.length; i++) {
-            if (states[i].name === state) {
+            if (states[i].name === stateName) {
+                $scope.state = states[i];
                 states[i].active = true;
                 $scope.title = states[i].title;
             } else {
@@ -13,11 +14,11 @@ angular.module('tucha')
             }
         }
 
-        $http.get('/r/' + state).then(function (data) {
+        $http.get('/r/' + stateName).then(function (data) {
             //$scope.data = data.data;
             var columnDefs = [];
 
-            if (state === 'animal') {
+            if (stateName === 'animal') {
                 columnDefs.push({
                     field: 'id',
                     name: '',
@@ -40,7 +41,7 @@ angular.module('tucha')
                 rowTemplate: 'views/directives/rowTemplate.html',
                 appScopeProvider: {
                     rowClick: function (row) {
-                        $location.path('/' + state + '/' + row.entity.id);
+                        $location.path('/' + stateName + '/' + row.entity.id);
                     }
                 }
             };
@@ -48,6 +49,6 @@ angular.module('tucha')
         });
 
         $scope.add = function () {
-            $location.path('/' + state + "/new");
+            $location.path('/' + stateName + "/new");
         };
     });

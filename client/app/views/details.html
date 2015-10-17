@@ -1,5 +1,9 @@
-<h1 ng-if="details.code || details.name" class="page-header">{{details.code}} {{details.name}}</h1>
-<h1 ng-if="!details.code && !details.name" class="page-header">{{title}}</h1>
+<h1 ng-if="details.code || details.name" class="page-header">
+    <span class="glyphicon {{state.icon}}"></span>{{details.code}} {{details.name}}
+</h1>
+<h1 ng-if="!details.code && !details.name" class="page-header">
+    <span class="glyphicon {{state.icon}}"></span>{{title}}
+</h1>
 <div class="form-horizontal" ng-include="template"></div>
 <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
