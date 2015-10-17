@@ -27,7 +27,7 @@ angular.module('tucha')
             }
         } else {
             $scope.editable = false;
-            $http.get('/r' + $location.path()).then(function (data) {
+            $http.get('/r/' + state + '/' + $scope.entityId).then(function (data) {
                 $scope.details = data.data;
                 if (state === 'animal') {
                     $scope.details.states = [];
@@ -62,7 +62,7 @@ angular.module('tucha')
                 var fd = new FormData();
                 fd.append('file', files[0]);
 
-                $http.post('/r/' + state + '/' + (id) + '/picture', fd, {
+                $http.post('/r/' + state + '/' + id + '/picture', fd, {
                     withCredentials: true,
                     headers: {'Content-Type': undefined},
                     transformRequest: angular.identity
@@ -79,7 +79,7 @@ angular.module('tucha')
             $scope.editable = true;
         };
         $scope.submit = function () {
-            $http.post('/r' + $location.path(), $scope.details).then(function (result) {
+            $http.post('/r/' + state + '/' + $scope.entityId, $scope.details).then(function (result) {
                 if (state === 'animal' && $scope.entityId === 'new') {
                     var files = angular.element('input[type=file]')[0].files;
 
@@ -104,7 +104,7 @@ angular.module('tucha')
             $scope.editable = false;
         };
         $scope.delete = function () {
-            $http.delete('/r/animal/' + $scope.entityId).then(function () {
+            $http.delete('/r/' + state + '/' + $scope.entityId).then(function () {
                 $location.path('/' + state);
             });
         };
