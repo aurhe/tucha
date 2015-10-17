@@ -39,11 +39,10 @@ function logQueryError(err) {
     }
 }
 
-//html
+// respond to static files requests
 app.use(express.static('public'));
 
-//rest
-
+// respond to rest requests
 function storeImage(id, buffer, callback) {
     new jimp(buffer, function (err, image) {
         var w = image.bitmap.width,
@@ -93,10 +92,117 @@ function saveState(state) {
         });
 }
 
-app.get('/r/adoptableAnimals', function (req, res) { // used in the slider
-    var sql = 'select id,name,gender from tucha.animal where is_adoptable=true and ' +
+var selects = {
+    animal: {
+        entity: 'animal',
+        details: 'select id, code, name, species, gender, breed, date_of_birth, size, color,' +
+        ' details, is_adoptable, is_adoptable_reason, received_by, received_from, received_date,' +
+        ' received_details, chip_code, is_sterilizated, sterilization_date, sterilization_by, sterilization_details,' +
+        ' current_situation, missing_details, death_date, death_reason' +
+        ' from tucha.animal where is_deleted is null',
+        dropdown: 'select id, name from tucha.animal where is_deleted is null',
+        adoptableAnimals: 'select id,name,gender from tucha.animal where is_adoptable=true and ' +
         '(current_situation="IN_SHELTER" or current_situation="FAT" or current_situation="FAR") and ' +
-        'picture_thumbnail is not null and is_deleted is null';
+        'picture_thumbnail is not null and is_deleted is null'
+    },
+    veterinary: {
+        entity: 'veterinary',
+        details: 'select id, name, address, details from tucha.veterinary where is_deleted is null',
+        dropdown: 'select id, name from tucha.veterinary where is_deleted is null'
+    },
+    person: {
+        entity: 'person',
+        details: 'select id, name, address, city, phone, email, new_adoption_allowed, details, can_host, host_capacity, ' +
+        'host_species, host_details from tucha.person where is_deleted is null',
+        dropdown: 'select id, name from tucha.person where is_deleted is null'
+    },
+    user: {
+        entity: 'user',
+        details: 'select username, role, person from tucha.user where is_deleted is null'
+    },
+    medicalExam: {
+        entity: 'medical_exam',
+        details: 'select id, animal, date, veterinary, details from tucha.medical_exam where is_deleted is null'
+    },
+    vaccination: {
+        entity: 'vaccination',
+        details: 'select id, animal, date, veterinary, details from tucha.vaccination where is_deleted is null'
+    },
+    deparasitation: {
+        entity: 'deparasitation',
+        details: 'select id, animal, date, veterinary, details from tucha.deparasitation where is_deleted is null'
+    },
+    medicalTreatment: {
+        entity: 'medical_treatment',
+        details: 'select id, animal, date, veterinary, details from tucha.medical_treatment where is_deleted is null'
+    },
+    medicamentPrescription: {
+        entity: 'medicament_prescription',
+        details: 'select id, animal, date, veterinary, details from tucha.medicament_prescription where is_deleted is null'
+    },
+    aggressivityReport: {
+        entity: 'aggressivity_report',
+        details: 'select id, animal, date, reported_by, details from tucha.aggressivity_report where is_deleted is null'
+    },
+    escapeReport: {
+        entity: 'escape_report',
+        details: 'select id, animal, date, details, returned_date from tucha.escape_report where is_deleted is null'
+    },
+    adoption: {
+        entity: 'adoption',
+        details: 'select id, animal, date, details, adoptant from tucha.adoption where is_deleted is null'
+    },
+    medicament: {
+        entity: 'medicament',
+        details: 'select id, name, details from tucha.medicament where is_deleted is null',
+        dropdown: 'select id, name from tucha.medicament where is_deleted is null'
+    },
+    supplier: {
+        entity: 'supplier',
+        details: 'select id, name, address, phone, email, details from tucha.supplier where is_deleted is null',
+        dropdown: 'select id, name from tucha.supplier where is_deleted is null'
+    },
+    donation: {
+        entity: 'donation',
+        details: 'select id, details, donated_by from tucha.donation where is_deleted is null'
+    },
+    medicamentUnit: {
+        entity: 'medicament_unit ',
+        details: 'select id, medicament, details, used, used_in, opening_date, expiration_date, bought_in, ' +
+        'bought_by, donated_by, acquired_date, unitary_price, initial_quantity, remaining_quantity ' +
+        'from tucha.medicament_unit where is_deleted is null'
+    },
+    devolution: {
+        entity: 'devolution',
+        details: 'select id, animal, adoptant, reason, date from tucha.devolution where is_deleted is null'
+    },
+    medicamentUsed: {
+        entity: 'medicament_used',
+        details: 'select id, medicament, animal, administrator, prescription, date, quantity ' +
+        'from tucha.medicament_used where is_deleted is null'
+    },
+    medicamentSupplier: {
+        entity: 'medicament_supplier',
+        details: 'select supplier, medicament from tucha.medicament_supplier where is_deleted is null'
+    },
+    volunteer: {
+        entity: 'volunteer',
+        details: 'select id, person, disponibility, activities, expertises, connections ' +
+        'from tucha.volunteer where is_deleted is null'
+    },
+    host: {
+        entity: 'host',
+        details: 'select id, animal, person, start_date, end_date, details from tucha.host where is_deleted is null'
+    },
+    state: {
+        entity: 'state',
+        details: 'select id, animal, date, details, position from tucha.state where is_deleted is null'
+    }
+};
+
+// data for slider
+app.get('/r/adoptableAnimals', function (req, res) { // used in the slider
+    var sql = selects[req.params.entity].adoptableAnimals;
     console.log(sql);
     connection.query(sql, function (err, rows) {
         logQueryError(err);
@@ -104,43 +210,20 @@ app.get('/r/adoptableAnimals', function (req, res) { // used in the slider
     });
 });
 
-var selects = {
-    animal: 'select id, code, name, species, gender, breed, date_of_birth, size, color,' +
-    ' details, is_adoptable, is_adoptable_reason, received_by, received_from, received_date,' +
-    ' received_details, chip_code, is_sterilizated, sterilization_date, sterilization_by, sterilization_details,' +
-    ' current_situation, missing_details, death_date, death_reason' +
-    ' from tucha.animal where is_deleted is null',
-    veterinary: 'select id, name, address, details from tucha.veterinary where is_deleted is null',
-    person: 'select id, name, address, city, phone, email, new_adoption_allowed, details, can_host, host_capacity, ' +
-    'host_species, host_details from tucha.person where is_deleted is null',
-    user: 'select username, role, person from tucha.user where is_deleted is null',
-    medicalExam: 'select id, animal, date, veterinary, details from tucha.medical_exam where is_deleted is null',
-    vaccination: 'select id, animal, date, veterinary, details from tucha.vaccination where is_deleted is null',
-    deparasitation: 'select id, animal, date, veterinary, details from tucha.deparasitation where is_deleted is null',
-    medicalTreatment: 'select id, animal, date, veterinary, details from tucha.medical_treatment where is_deleted is null',
-    medicamentPrescription: 'select id, animal, date, veterinary, details from tucha.medicament_prescription where is_deleted is null',
-    aggressivityReport: 'select id, animal, date, reported_by, details from tucha.aggressivity_report where is_deleted is null',
-    escapeReport: 'select id, animal, date, details, returned_date from tucha.escape_report where is_deleted is null',
-    adoption: 'select id, animal, date, details, adoptant from tucha.adoption where is_deleted is null',
-    medicament: 'select id, name, details from tucha.medicament where is_deleted is null',
-    supplier: 'select id, name, address, phone, email, details from tucha.supplier where is_deleted is null',
-    donation: 'select id, details, donated_by from tucha.donation where is_deleted is null',
-    medicamentUnit: 'select id, medicament, details, used, used_in, opening_date, expiration_date, bought_in, ' +
-    'bought_by, donated_by, acquired_date, unitary_price, initial_quantity, remaining_quantity ' +
-    'from tucha.medicament_unit where is_deleted is null',
-    devolution: 'select id, animal, adoptant, reason, date from tucha.devolution where is_deleted is null',
-    medicamentUsed: 'select id, medicament, animal, administrator, prescription, date, quantity ' +
-    'from tucha.medicament_used where is_deleted is null',
-    medicamentSupplier: 'select supplier, medicament from tucha.medicament_supplier where is_deleted is null',
-    volunteer: 'select id, person, disponibility, activities, expertises, connections ' +
-    'from tucha.volunteer where is_deleted is null',
-    host: 'select id, animal, person, start_date, end_date, details from tucha.host where is_deleted is null',
-    state: 'select id, animal, date, details, position from tucha.host where is_deleted is null'
-};
-
 // get grid
 app.get('/r/:entity', function (req, res) {
-    var sql = selects[req.params.entity];
+    var sql = selects[req.params.entity].details;
+    console.log(sql);
+    connection.query(sql, function (err, rows) {
+        logQueryError(err);
+        console.log(rows);
+        res.json(rows);
+    });
+});
+
+// get dropdown data
+app.get('/r/dropdown/:entity', function (req, res) {
+    var sql = selects[req.params.entity].dropdown;
     console.log(sql);
     connection.query(sql, function (err, rows) {
         logQueryError(err);
@@ -152,7 +235,7 @@ app.get('/r/:entity', function (req, res) {
 // get details
 app.get('/r/:entity/:id', function (req, res) {
     //var sql = 'select * from tucha.' + req.params.entity + ' where id=' + mysql.escape(req.params.id);
-    var sql = selects[req.params.entity] + ' and id=' + mysql.escape(req.params.id);
+    var sql = selects[req.params.entity].details + ' and id=' + mysql.escape(req.params.id);
     console.log(sql);
     connection.query(sql, function (err, rows) {
         logQueryError(err);
@@ -163,7 +246,7 @@ app.get('/r/:entity/:id', function (req, res) {
 
 // save details
 app.post('/r/:entity/:id', function (req, res) {
-    var sql, entity = req.params.entity, data = req.body, states = null;
+    var sql, entity = selects[req.params.entity].entity, data = req.body, states = null;
 
     if (req.params.id === 'new') {
         sql = 'insert into tucha.' + entity + ' set ?';
@@ -197,7 +280,7 @@ app.post('/r/:entity/:id', function (req, res) {
 
 // save details
 app.delete('/r/:entity/:id', function (req, res) {
-    var sql = 'update tucha.' + req.params.entity + ' set is_deleted=true where id=' + mysql.escape(req.params.id);
+    var sql = 'update tucha.' + selects[req.params.entity].entity + ' set is_deleted=true where id=' + mysql.escape(req.params.id);
     console.log(sql);
     connection.query(sql, function (err) {
         logQueryError(err);

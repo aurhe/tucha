@@ -1,0 +1,15 @@
+<div class="form-group">
+    <label for="{{name}}" class="col-sm-3 control-label text-right">{{label}}</label>
+
+    <div class="col-sm-5 typeahead">
+        <input ng-if="editable" type="text" ng-model="selected.text" class="form-control dropdown-toggle" id="{{name}}"
+               ng-change="inputChanged()" ng-keydown="keydown($event)">
+        <ul ng-if="editable && showDropdown" class="list-group">
+            <button ng-repeat="item in items" type="button" class="list-group-item" ng-class="{'active': item.active}"
+                    ng-click="itemSelected(item)">{{item.name}}
+            </button>
+        </ul>
+
+        <p ng-if="!editable" class="form-control-static">{{selected.text}}</p>
+    </div>
+</div>

@@ -55,17 +55,19 @@
 <tucha-details ng-if="details.is_adoptable == 0" label="Motivo da não adoptabilidade" editable="editable"
                model="details"
                name="is_adoptable_reason"></tucha-details>
-<!--<tucha-text label="Recevido por" editable="editable" model="details" name="received_by"></tucha-text>-->
-<!--<tucha-text label="Recebido de" editable="editable" model="details" name="received_from"></tucha-text>-->
+<tucha-typeahead label="Recebido por" editable="editable" model="details" name="received_by"
+                 url="dropdown/person"></tucha-typeahead>
+<tucha-typeahead label="Recebido de" editable="editable" model="details" name="received_from"
+                 url="dropdown/person"></tucha-typeahead>
 <tucha-date label="Data de Recebimento" editable="editable" model="details" name="received_date"></tucha-date>
 <tucha-text label="Código do Chip" editable="editable" model="details" name="chip_code"></tucha-text>
 <tucha-boolean label="Esterilizado" editable="editable" model="details" name="is_sterilizated"></tucha-boolean>
 <tucha-date ng-if="details.is_sterilizated == 1" label="Data de Esterilizamento" editable="editable" model="details"
             name="sterilization_date"></tucha-date>
-<!--<tucha-text label="Esterliziado por" editable="editable" model="details" name="sterilization_by"></tucha-text>-->
+<tucha-typeahead ng-if="details.is_sterilizated == 1" label="Esterliziado por" editable="editable" model="details"
+                 name="sterilization_by" url="dropdown/veterinary"></tucha-typeahead>
 <tucha-details ng-if="details.is_sterilizated == 1" label="Detalhes do esterilizamento" editable="editable"
-               model="details"
-               name="sterilization_details"></tucha-details>
+               model="details" name="sterilization_details"></tucha-details>
 <div class="form-group">
     <label for="current_situation" class="col-sm-3 control-label text-right">Situação actual</label>
 
