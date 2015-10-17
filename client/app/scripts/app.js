@@ -40,6 +40,10 @@ angular
                 templateUrl: 'views/login.html',
                 controller: 'LoginCtrl'
             })
+            .when('/changePassword', {
+                templateUrl: 'views/changePassword.html',
+                controller: 'ChangePasswordCtrl'
+            })
             .otherwise({
                 redirectTo: '/animal'
             });

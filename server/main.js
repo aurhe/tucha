@@ -45,6 +45,9 @@ var passport = require('passport'),
     session = require('express-session'),
     bcrypt = require('bcrypt-nodejs');
 
+// TODO change connection to https
+// Because we are hosting the app in openshift, https certification is handled by it automatically
+
 passport.use(new LocalStrategy(
     function (username, password, done) {
         connection.query('select password_hash from tucha.user where username=' + mysql.escape(username), function (err, rows) {
@@ -374,6 +377,11 @@ app.get('/r/animal/:id/thumbnail', auth, function (req, res) {
 app.get('/r/animal/:id/states', auth, function (req, res) {
     query('select date, details, position from tucha.state where animal=' + req.params.id +
         ' order by position asc', res);
+});
+
+app.post('/r/changePassword', auth, function (req, res) {
+    query('update tucha.user set password_hash=\'' + bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null) +
+        '\' where username=' + mysql.escape(req.user.username), res);
 });
 
 app.listen(config.nodePort, config.nodeIp);
