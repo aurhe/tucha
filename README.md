@@ -10,8 +10,6 @@ Requires [Node.js](http://nodejs.org/), [Grunt](http://gruntjs.com/) and [MySQL]
 
 Load the database/script.sql to a MySQL database and configure server/main.js to connect to it.
 
-To connect with Dropbox, configure the API credentials in server/main.js.
-
 ### Server
 ```
 $ npm install
