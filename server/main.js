@@ -273,7 +273,7 @@ var selects = {
 
 // data for slider
 app.get('/r/adoptableAnimals', function (req, res) { // used in the slider, must no check authentication
-    query(selects[req.params.entity].adoptableAnimals, res);
+    query(selects.animal.adoptableAnimals, res);
 });
 
 // get grid
@@ -339,7 +339,7 @@ app.delete('/r/:entity/:id', auth, function (req, res) {
 });
 
 var emptyImage = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64'); // 1px gif
-app.get('/r/animal/:id/picture', auth, function (req, res) {
+app.get('/r/animal/:id/picture', function (req, res) {
     connection.query('select picture from tucha.animal where id=' + req.params.id, function (err, rows) {
         if (err || rows.length === 0 || rows[0].picture === null) {
             res.writeHead(200, {'Content-Type': 'image/gif'});
