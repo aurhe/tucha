@@ -32,7 +32,7 @@ angular.module('tucha')
         },
         size: {field: 'size', name: 'Tamanho', visible: false},
         color: {field: 'color', name: 'Cor', visible: false},
-        details: {field: 'details', name: 'Detalhes', visible: false},
+        details: {field: 'details', name: 'Detalhes'},
         is_adoptable: {
             field: 'is_adoptable',
             name: 'Adoptável',
@@ -76,7 +76,7 @@ angular.module('tucha')
         supplier: {field: 'supplier', name: 'Fornecedor'},
         medicament: {field: 'medicament', name: 'Medicamento'},
         used: {field: 'used', name: 'Usado'},
-        usedIn: {field: 'usedIn', name: 'Usado em'},
+        used_in: {field: 'used_in', name: 'Usado em'},
         opening_date: {field: 'opening_date', name: 'Data de Abertura'},
         expiration_date: {field: 'expiration_date', name: 'Data de Expiração'},
         bought_in: {field: 'bought_in', name: 'Comprado em', visible: false},
@@ -94,11 +94,15 @@ angular.module('tucha')
         host_capacity: {field: 'host_capacity', name: 'Capacidade de Acolhimento'},
         host_details: {field: 'host_details', name: 'Detalhes', visible: false},
         host_species: {field: 'host_species', name: 'Que tipos de Animais Acolhe', visible: false},
-        position: {field: 'position', name: 'Posição'},
+        position: {field: 'position', name: 'Posição', visible: false},
         username: {field: 'username', name: 'Username'},
         role: {field: 'role', name: 'Funções'},
         disponibility: {field: 'disponibility', name: 'Disponibilidade'},
         activities: {field: 'activities', name: 'Actividades'},
         expertises: {field: 'expertises', name: 'Competências'},
-        connections: {field: 'connections', name: 'Contactos'}
+        connections: {field: 'connections', name: 'Contactos'},
+        administrator: {field: 'administrator', name: 'Administrador'},
+        prescription: {field: 'prescription', name: 'Receita Médica'},
+        quantity: {field: 'quantity', name: 'Quantidade'},
+        quantity_unit: {field: 'quantity', name: 'Unidade da Quantidade'}
     });
