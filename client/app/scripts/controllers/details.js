@@ -41,7 +41,21 @@ angular.module('tucha')
 
         if (stateName === 'animal') {
             $scope.addState = function () {
-                $scope.details.states.push({position: $scope.details.states.length, date: new Date(), details: ''});
+                var position = 0;
+                for (var i = 0; i < $scope.details.states.length; i++) {
+                    if ($scope.details.states[i].position >= position) {
+                        position = $scope.details.states[i].position + 1;
+                    }
+                }
+                $scope.details.states.push({position: position, date: new Date(), details: ''});
+            };
+            $scope.deleteState = function (state) {
+                for (var i = 0; i < $scope.details.states.length; i++) {
+                    if ($scope.details.states[i].position === state.position) {
+                        $scope.details.states[i].deleted = true;
+                        break;
+                    }
+                }
             };
 
             $scope.openStateDatePicker = function ($index) {

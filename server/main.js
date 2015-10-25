@@ -149,18 +149,22 @@ function storeImage(id, buffer, callback) {
 }
 
 function saveState(state) {
-    connection.query('select * from tucha.state where position=' + state.position + ' and animal=' + state.animal,
-        function (err, rows) {
-            var sql;
+    if (state.deleted) {
+        connection.query('update tucha.state set is_deleted=true where position=' + state.position + ' and animal=' + state.animal);
+    } else {
+        connection.query('select * from tucha.state where position=' + state.position + ' and animal=' + state.animal,
+            function (err, rows) {
+                var sql;
 
-            if (err || rows.length === 0) {
-                sql = 'insert into tucha.state set ?';
-            } else if (rows.length > 0) {
-                sql = 'update tucha.state set ? where position=' + state.position + ' and animal=' + state.animal;
-            }
+                if (err || rows.length === 0) {
+                    sql = 'insert into tucha.state set ?';
+                } else if (rows.length > 0) {
+                    sql = 'update tucha.state set ? where position=' + state.position + ' and animal=' + state.animal;
+                }
 
-            connection.query(sql, state, logQueryError);
-        });
+                connection.query(sql, state, logQueryError);
+            });
+    }
 }
 
 var selects = {
@@ -168,7 +172,7 @@ var selects = {
         entity: 'animal',
         details: 'select id, code, name, species, gender, breed, date_of_birth, size, color,' +
         ' details, is_adoptable, is_adoptable_reason, received_by, received_from, received_date,' +
-        ' received_details, chip_code, is_sterilizated, sterilization_date, sterilization_by, sterilization_details,' +
+        ' chip_code, is_sterilizated, sterilization_date, sterilization_by, sterilization_details,' +
         ' current_situation, missing_details, death_date, death_reason' +
         ' from tucha.animal where is_deleted is null',
         dropdown: 'select id, name from tucha.animal where is_deleted is null',
@@ -375,7 +379,7 @@ app.get('/r/animal/:id/thumbnail', auth, function (req, res) {
 });
 
 app.get('/r/animal/:id/states', auth, function (req, res) {
-    query('select date, details, position from tucha.state where animal=' + req.params.id +
+    query('select date, details, position from tucha.state where animal=' + req.params.id + ' and is_deleted is null' +
         ' order by position asc', res);
 });
 

@@ -43,7 +43,6 @@ angular.module('tucha')
         received_by: {field: 'received_by', name: 'Recebido por', visible: false},
         received_from: {field: 'received_from', name: 'Receido de', visible: false},
         received_date: {field: 'received_date', name: 'Recebido em', visible: false},
-        received_details: {field: 'received_details', name: 'Detalhes do Recebimento', visible: false}, //TODO remove this from db
         chip_code: {field: 'chip_code', name: 'Código do Chip', visible: false},
         is_sterilizated: {
             field: 'is_sterilizated',
