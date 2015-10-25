@@ -2,11 +2,10 @@
                  url="dropdown/medicament"></tucha-typeahead>
 <tucha-details label="Detalhes" editable="editable" model="details" name="details"></tucha-details>
 <tucha-boolean label="Usado" editable="editable" model="details" name="used"></tucha-boolean>
-<tucha-typeahead label="Usado em" editable="editable" model="details" name="used_in"
-                 url="dropdown/animal"></tucha-typeahead>
 <tucha-date label="Data de abertura" editable="editable" model="details" name="opening_date"></tucha-date>
 <tucha-date label="Data de expiração" editable="editable" model="details" name="expiration_date"></tucha-date>
-<tucha-text label="Comprado em" editable="editable" model="details" name="bought_in"></tucha-text>
+<tucha-typeahead label="Comprado em" editable="editable" model="details" name="bought_in"
+                 url="dropdown/supplier"></tucha-typeahead>
 <tucha-typeahead label="Comprado por" editable="editable" model="details" name="bought_by"
                  url="dropdown/person"></tucha-typeahead>
 <tucha-typeahead label="Doado por" editable="editable" model="details" name="donated_by"
