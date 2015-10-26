@@ -76,7 +76,6 @@ angular.module('tucha')
         supplier: {field: 'supplier', name: 'Fornecedor'},
         medicament: {field: 'medicament', name: 'Medicamento'},
         used: {field: 'used', name: 'Usado'},
-        used_in: {field: 'used_in', name: 'Usado em'},
         opening_date: {field: 'opening_date', name: 'Data de Abertura'},
         expiration_date: {field: 'expiration_date', name: 'Data de Expiração'},
         bought_in: {field: 'bought_in', name: 'Comprado em', visible: false},
