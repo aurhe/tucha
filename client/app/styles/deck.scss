@@ -1,0 +1,52 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+.deck-grid[deckgrid]::before {
+  content: '4 .column.column-1-4';
+  font-size: 0; /* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
+  visibility: hidden;
+}
+
+.deck-grid .column {
+  float: left;
+}
+
+.deck-grid .column-1-4 {
+  width: 25%;
+}
+
+.photo {
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: 3px;
+  margin: 0 10px 10px 0;
+  position: relative;
+}
+
+.photo a {
+  color: #444;
+  text-decoration: none;
+  outline: none;
+}
+
+.photo img {
+  width: calc(100% - 10px);
+  margin: 5px;
+}
+
+.photo .photo-description {
+  padding: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ngdialog.ngdialog-theme-default {
+  padding-bottom: 40px;
+  padding-top: 40px;
+}
+
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+  width: 809px;
+  padding-top: 0;
+}
