@@ -1,0 +1,29 @@
+<div class="form-horizontal">
+    <div class="form-group">
+        <img ng-src="/r/animal/{{animal.id}}/picture" class="img-responsive img-thumbnail"/>
+    </div>
+    <div class="form-group" ng-if="animal.name !== null">
+        <label class="col-sm-3 control-label text-right">Nome</label>
+        <div class="col-sm-9 form-control-static">{{animal.name}}</div>
+    </div>
+    <div class="form-group" ng-if="animal.gender !== null">
+        <label class="col-sm-3 control-label text-right">Género</label>
+        <div class="col-sm-9 form-control-static">{{animal.gender === 0 ? 'Macho' : 'Fêmea'}}</div>
+    </div>
+    <div class="form-group" ng-if="animal.breed !== null">
+        <label class="col-sm-3 control-label text-right">Raça</label>
+        <div class="col-sm-9 form-control-static">{{animal.breed}}</div>
+    </div>
+    <div class="form-group" ng-if="animal.date_of_birth !== null">
+        <label class="col-sm-3 control-label text-right">Idade</label>
+        <div class="col-sm-9 form-control-static">{{animal.age}}</div>
+    </div>
+    <div class="form-group" ng-if="animal.details !== null">
+        <label class="col-sm-3 control-label text-right">Detalhes</label>
+        <div class="col-sm-9 form-control-static">{{animal.details}}</div>
+    </div>
+    <div class="form-group" ng-if="animal.is_sterilizated !== null">
+        <label class="col-sm-3 control-label text-right">Esterilizado</label>
+        <div class="col-sm-9 form-control-static">{{animal.is_sterilizated === 0 ? 'Não' : 'Sim'}}</div>
+    </div>
+</div>
