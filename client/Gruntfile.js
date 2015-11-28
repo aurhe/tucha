@@ -403,7 +403,8 @@ module.exports = function (grunt) {
                         '.htaccess',
                         '*.html',
                         'images/{,*/}*.{webp}',
-                        'styles/fonts/{,*/}*.*'
+                        'styles/fonts/{,*/}*.*',
+                        'views/deck*.html' // angular-deckgrid does not work with ng-templates
                     ]
                 }, {
                     expand: true,
