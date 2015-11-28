@@ -363,6 +363,19 @@ app.get('/r/dropdown/:entity', auth, function (req, res) {
     query(selects[req.params.entity].dropdown, res);
 });
 
+// get animal details, no auth used to work in deck list
+app.get('/r/animal/:id', function (req, res) {
+    var sql = selects.animal.details + ' and id=' + mysql.escape(req.params.id);
+    console.log(sql);
+    connection.query(sql, function (err, rows) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.json(rows[0]);
+    });
+});
+
 // get details
 app.get('/r/:entity/:id', auth, function (req, res) {
     var sql = selects[req.params.entity].details + ' and id=' + mysql.escape(req.params.id);
