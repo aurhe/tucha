@@ -32,6 +32,7 @@ body {
 
 .photo img {
   width: calc(100% - 10px);
+  min-height: 176px;
   margin: 5px;
 }
 
