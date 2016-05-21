@@ -16,6 +16,13 @@
                yes-label="Fêmea"></tucha-boolean>
 <tucha-text label="Raça" editable="editable" model="details" name="breed"></tucha-text>
 <tucha-date label="Data de Nascimento" editable="editable" model="details" name="date_of_birth"></tucha-date>
+<div class="form-group">
+    <label class="col-sm-3 control-label">Idade</label>
+
+    <div class="col-sm-5">
+        <p class="form-control-static">{{details.date_of_birth | tuchaAge}}</p>
+    </div>
+</div>
 <tucha-text label="Tamanho" editable="editable" model="details" name="size"></tucha-text>
 <tucha-text label="Cor" editable="editable" model="details" name="color"></tucha-text>
 <div ng-if="editable" class="form-group">
@@ -97,8 +104,8 @@
     </div>
 </div>
 <tucha-details
-        ng-if="details.current_situation === 'MISSING_FROM_SHELTER' || details.current_situation === 'MISSING_FROM_ADOPTER'"
-        label="Detalhes do Desaparecimento" editable="editable" model="details" name="missing_details"></tucha-details>
+    ng-if="details.current_situation === 'MISSING_FROM_SHELTER' || details.current_situation === 'MISSING_FROM_ADOPTER'"
+    label="Detalhes do Desaparecimento" editable="editable" model="details" name="missing_details"></tucha-details>
 <tucha-date ng-if="details.current_situation === 'DEAD'"
             label="Data do falecimento" editable="editable" model="details" name="death_date"></tucha-date>
 <tucha-details ng-if="details.current_situation === 'DEAD'"
