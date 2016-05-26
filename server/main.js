@@ -7,7 +7,7 @@ var config = {
     dbHost: '127.0.0.1',
     dbPort: '3306',
     dbUser: 'root',
-    dbPassword: 'mysql',
+    dbPassword: '',
     sessionSecret: 'sessionSecret'
 };
 
@@ -97,12 +97,25 @@ function auth(req, res, next) {
     }
 }
 
-function query(sql, res) {
+// http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+function query(sql, res, shuffle) {
     console.log(sql);
     connection.query(sql, function (err, rows) {
         if (err) {
             console.log(err);
             return;
+        }
+        if (shuffle) {
+            shuffleArray(rows);
         }
         res.json(rows);
     });
@@ -350,7 +363,7 @@ var selects = {
 
 // data for slider
 app.get('/r/adoptableAnimals', function (req, res) { // used in the slider, must no check authentication
-    query(selects.animal.adoptableAnimals, res);
+    query(selects.animal.adoptableAnimals, res, true);
 });
 
 // get grid
