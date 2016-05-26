@@ -87,9 +87,21 @@ body {
 .ngdialog.ngdialog-theme-default {
     padding-bottom: 40px;
     padding-top: 40px;
-}
 
-.ngdialog.ngdialog-theme-default .ngdialog-content {
-    width: 500px;
-    padding-top: 0;
+    .ngdialog-content {
+        width: 500px;
+        padding-top: 0;
+
+        .form-group {
+            margin-bottom: 0;
+        }
+    }
+
+    .popup-photo {
+        text-align: center;
+
+        img {
+            max-height: 500px;
+        }
+    }
 }
