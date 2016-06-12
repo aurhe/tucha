@@ -10,10 +10,11 @@
             cssEase: 'linear',
             asNavFor: '.nav-slider',
             lazyLoad: 'ondemand',
-            adaptiveHeight: true
+            adaptiveHeight: false,
+            variableWidth: false
         });
         $('.nav-slider').slick({
-            //arrows: false,
+            arrows: false,
             slidesToShow: 5,
             slidesToScroll: 1,
             centerMode: true,
@@ -31,23 +32,29 @@
             $('.slider').slick('slickAdd', html);
             $('.nav-slider').slick('slickAdd', html);
 
-            function fillDogName(index) {
-                if (data[index].gender === 1) {
-                    $('#dog-gender').text('a');
-                } else {
-                    $('#dog-gender').text('o');
-                }
-
-                $('#dog-name span').text(data[index].name);
-                $('#dog-name').textfill({
+            function fixTextSize() {
+                $('.dog-name').textfill({
                     maxFontPixels: 200
                 });
+            }
+
+            function fillDogName(index) {
+                if (data[index].gender === 1) {
+                    $('.adopt-text').text('Adopte a');
+                } else {
+                    $('.adopt-text').text('Adopte o');
+                }
+
+                $('.dog-name span').text(data[index].name);
+                fixTextSize();
             }
 
             $('.slider').on('afterChange', function (event, slick, currentSlide) {
                 fillDogName(currentSlide);
             });
             fillDogName(0);
+
+            window.onresize = fixTextSize;
 
             $('.slider').slick('slickPlay');
 
