@@ -27,8 +27,8 @@ angular.module('tucha')
         date_of_birth: {
             field: 'date_of_birth',
             name: 'Idade',
-            width: 100,
-            cellTemplate: '<span>{{row.entity.date_of_birth | tuchaAge}}</span>'
+            width: 50,
+            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.date_of_birth | tuchaAge}}</div>'
         },
         size: {field: 'size', name: 'Tamanho', visible: false},
         color: {field: 'color', name: 'Cor', visible: false},
