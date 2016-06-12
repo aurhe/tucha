@@ -5,23 +5,27 @@
 
 html {
     overflow: hidden;
+    height: 100%;
 }
 
 body {
-    //background-color: black;
+    height: 100%;
     margin: 0;
     font-family: "texgyreadventor", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
+}
 
-    width: 960px; // old website limitation
+.slider-container {
+    height: 450px;
 
-    //background-color: #19191F;
-    //background-image: linear-gradient(#5FAAD5, #ffffff);
+    .slick-slider {
+        margin-bottom: 0;
+    }
 }
 
 .slider {
-    width: 670px;
-    height: 450px;
+    width: calc(100% - 300px);
+    height: 100%;
     display: inline-block;
 
     .slick-prev,
@@ -34,15 +38,32 @@ body {
     .slick-prev:before,
     .slick-next:before {
         font-size: 60px;
-        opacity: 0;
+        opacity: 0.1;
+        color: #008080;
     }
 
     img {
-        //width: 100%;
+        // vertically and horizontally center
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    .slick-list,
+    .slick-track {
+        height: 100%;
+        width: 100%;
     }
 
     .slick-list .slick-slide img {
-        height: 450px;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+
         margin: auto;
         display: block;
     }
@@ -50,37 +71,23 @@ body {
 
 .slider:hover .slick-prev:before,
 .slider:hover .slick-next:before {
-    opacity: 0.75;
-}
-
-.nav-slider {
-    width: 100%;
-    cursor: pointer;
-
-    .slick-slide {
-        width: 30%;
-
-        img {
-            max-width: 90%;
-            max-height: 87px;
-            margin: auto;
-        }
-    }
+    opacity: 0.5;
 }
 
 .slider-text {
     color: #008080;
-    width: 30%;
+    width: 300px;
     float: right;
     text-align: center;
 
     .adopt-text {
         margin-top: 70px;
         margin-bottom: 0px;
+        height: 70px;
         font-size: 40px;
     }
 
-    #dog-name {
+    .dog-name {
         height: 100px;
         margin-left: 20px;
         margin-right: 20px;
@@ -88,7 +95,7 @@ body {
 
     .contacts {
         border: solid;
-        margin-top: 78px;
+        margin-top: 70px;
         margin-left: 10px;
         margin-right: 10px;
 
@@ -98,21 +105,28 @@ body {
                 font-size: 20px;
             }
 
-            &.phone-number {
-                a {
-                    text-decoration: none;
-                    font-size: 40px;
-                }
+            &.phone-number a {
+                text-decoration: none;
+                font-size: 40px;
             }
 
-            &.email-address {
-                //margin-top: 10%;
-                a {
-                    text-decoration: none;
-                    font-size: 16px;
-                }
+            &.email-address a {
+                text-decoration: none;
+                font-size: 16px;
             }
         }
+    }
+}
+
+.nav-slider {
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+
+    .slick-slide img {
+        max-width: 90%;
+        max-height: 100px;
+        margin: auto;
     }
 }
 
@@ -124,3 +138,36 @@ body {
     left: 0px;
 }
 
+/* Responsive: Portrait tablets and up */
+@media (max-width: 768px) {
+
+    .slider {
+        width: 100%;
+        height: 400px;
+    }
+
+    .slider-text {
+        width: 100%;
+        float: none;
+
+        .adopt-text {
+            display: inline-block;
+            margin-top: 0;
+            height: 60px;
+        }
+
+        .dog-name {
+            display: inline-block;
+            width: 200px;
+            height: 70px;
+        }
+
+        .contacts {
+            margin-top: 0;
+        }
+    }
+
+    .nav-slider {
+        display: none;
+    }
+}
