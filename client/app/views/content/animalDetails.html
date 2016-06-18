@@ -2,8 +2,8 @@
     <label for="picture" class="col-sm-3 control-label text-right"></label>
 
     <div class="col-sm-5">
-        <a target="_blank" ng-href="/r/animal/{{details.id}}/picture.jpeg">
-            <img ng-src="/r/animal/{{details.id}}/picture?{{currentTime}}" class="img-responsive img-thumbnail"/>
+        <a target="_blank" ng-href="/r/animal/{{details.id}}/photo.jpeg">
+            <img ng-src="/r/animal/{{details.id}}/photo_h500?{{currentTime}}" class="img-responsive img-thumbnail"/>
         </a>
         <input ng-if="editable" type="file" id="picture" name="picture" class="col-sm-10 form-control"
                onchange="angular.element(this).scope().submitPicture(this.files)"/>

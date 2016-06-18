@@ -25,11 +25,15 @@
         });
 
         $.get('/r/adoptableAnimals', null, function (data) {
-            var html = '';
-            for (var i = 0; i < data.length; i++) {
-                html += '<div><img data-lazy="r/animal/' + data[i].id + '/picture"/></div>';
+            var html = '', i;
+            for (i = 0; i < data.length; i++) {
+                html += '<div><img data-lazy="r/animal/' + data[i].id + '/photo_h500"/></div>';
             }
             $('.slider').slick('slickAdd', html);
+            html = '';
+            for (i = 0; i < data.length; i++) {
+                html += '<div><img data-lazy="r/animal/' + data[i].id + '/photo_h100"/></div>';
+            }
             $('.nav-slider').slick('slickAdd', html);
 
             function fixTextSize() {
