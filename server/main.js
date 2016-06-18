@@ -544,3 +544,21 @@ app.post('/r/changePassword', auth, function (req, res) {
 });
 
 app.listen(config.nodePort, config.nodeIp);
+
+
+// function dbV1toV2convertion() {
+//     connection.query('select id, picture from tucha.animal', function (err, rows) {
+//         var i = 0;
+//         var intervalId = setInterval(function () {
+//             console.log(rows[i].id);
+//             if (rows[i].picture !== null) {
+//                 storeImage(rows[i].id, rows[i].picture);
+//             }
+//             i++;
+//             if (i === rows.length) {
+//                 clearInterval(intervalId);
+//             }
+//         }, 1000);
+//     });
+// }
+// dbV1toV2convertion();
