@@ -128,28 +128,69 @@ function logQueryError(err) {
 }
 
 function storeImage(id, buffer, callback) {
-    new jimp(buffer, function (err, image) {
-        var w = image.bitmap.width,
-            h = image.bitmap.height,
-            pictureRatio = 800 / w,
-            pw = w * pictureRatio,
-            ph = h * pictureRatio,
-            thumbnailRatio = 50 / w,
-            tw = w * thumbnailRatio,
-            th = h * thumbnailRatio;
 
-        image.resize(pw, ph)
-            .getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
-                var sql = 'update tucha.animal set picture=? where id=' + id;
+    connection.query('insert into tucha.photos set ?', {id: id}, function (err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        new jimp(buffer, function (err, image) {
+            var ratio, pw, ph,
+                w = image.bitmap.width,
+                h = image.bitmap.height;
+
+            if (w > h) {
+                ratio = 800 / w;
+            } else {
+                ratio = 800 / h;
+            }
+            pw = w * ratio;
+            ph = h * ratio;
+            image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
+                var sql = 'update tucha.photos set photo=? where id=' + id;
                 sql = mysql.format(sql, [resizedBuffer]);
-
                 connection.query(sql, logQueryError);
             });
 
-        image.resize(tw, th)
-            .getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
-                var sql = 'update tucha.animal set picture_thumbnail=? where id=' + id;
+            ratio = 500 / h;
+            pw = w * ratio;
+            ph = h * ratio;
+            image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
+                var sql = 'update tucha.photos set photo_h500=? where id=' + id;
                 sql = mysql.format(sql, [resizedBuffer]);
+                connection.query(sql, logQueryError);
+            });
+
+            ratio = 250 / w;
+            pw = w * ratio;
+            ph = h * ratio;
+            image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
+                var sql = 'update tucha.photos set photo_w250=? where id=' + id;
+                sql = mysql.format(sql, [resizedBuffer]);
+                connection.query(sql, logQueryError);
+            });
+
+            ratio = 100 / h;
+            pw = w * ratio;
+            ph = h * ratio;
+            image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
+                var sql = 'update tucha.photos set photo_h100=? where id=' + id;
+                sql = mysql.format(sql, [resizedBuffer]);
+                connection.query(sql, logQueryError);
+            });
+
+            if (w > h) {
+                ratio = 50 / w;
+            } else {
+                ratio = 50 / h;
+            }
+            pw = w * ratio;
+            ph = h * ratio;
+            image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
+                var sql = 'update tucha.photos set photo_wh50=? where id=' + id;
+                sql = mysql.format(sql, [resizedBuffer]);
+                connection.query(sql, logQueryError);
 
                 connection.query(sql, function (err) {
                     logQueryError(err);
@@ -158,6 +199,7 @@ function storeImage(id, buffer, callback) {
                     }
                 });
             });
+        });
     });
 }
 
@@ -442,39 +484,53 @@ app.delete('/r/:entity/:id', auth, function (req, res) {
 });
 
 var emptyImage = new Buffer('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64'); // 1px gif
-app.get(['/r/animal/:id/picture', '/r/animal/:id/picture.jpeg'], function (req, res) {
-    connection.query('select picture from tucha.animal where id=' + req.params.id, function (err, rows) {
-        if (err || rows.length === 0 || rows[0].picture === null) {
+
+function getPhoto(req, res, column) {
+    connection.query('select ' + column + ' from tucha.photos where id=' + req.params.id, function (err, rows) {
+        if (err || rows.length === 0 || rows[0][column] === null) {
             res.writeHead(200, {'Content-Type': 'image/gif'});
             res.end(emptyImage);
         } else if (rows.length > 0) {
             res.writeHead(200, {'Content-Type': 'image/jpeg'});
-            res.end(rows[0].picture, 'binary');
+            res.end(rows[0][column], 'binary');
         }
     });
+}
+
+// used after clicking the deck popup image. could be removed when space is an issue
+app.get(['/r/animal/:id/photo', '/r/animal/:id/photo.jpeg'], function (req, res) {
+    getPhoto(req, res, 'photo');
 });
 
-app.post('/r/animal/:id/picture', auth, function (req, res) {
+// main slider, details, deck popup
+app.get('/r/animal/:id/photo_h500', function (req, res) {
+    getPhoto(req, res, 'photo_h500');
+});
+
+// deck cards
+app.get('/r/animal/:id/photo_w250', function (req, res) {
+    getPhoto(req, res, 'photo_w250');
+});
+
+// secondary slider
+app.get('/r/animal/:id/photo_h100', function (req, res) {
+    getPhoto(req, res, 'photo_h100');
+});
+
+// grid thumbnails
+app.get('/r/animal/:id/photo_wh50', function (req, res) {
+    getPhoto(req, res, 'photo_wh50');
+});
+
+app.post('/r/animal/:id/photo', auth, function (req, res) {
     // store uploaded image
     if (typeof req.files.file !== 'undefined') { // image upload
-        storeImage(mysql.escape(req.params.id), req.files.file.buffer, function () {
+        storeImage(req.params.id, req.files.file.buffer, function () {
             res.end();
         });
     } else {
         res.end();
     }
-});
-
-app.get('/r/animal/:id/thumbnail', auth, function (req, res) {
-    connection.query('select picture_thumbnail from tucha.animal where id=' + req.params.id, function (err, rows) {
-        if (err || rows.length === 0 || rows[0].picture_thumbnail === null) {
-            res.writeHead(200, {'Content-Type': 'image/gif'});
-            res.end(emptyImage);
-        } else if (rows.length > 0) {
-            res.writeHead(200, {'Content-Type': 'image/jpeg'});
-            res.end(rows[0].picture_thumbnail, 'binary');
-        }
-    });
 });
 
 app.get('/r/animal/:id/states', auth, function (req, res) {

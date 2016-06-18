@@ -22,8 +22,8 @@ angular.module('tucha')
                 columnDefs.push({
                     field: 'id',
                     name: '',
-                    width: 30,
-                    cellTemplate: '<img width=30 src="r/animal/{{row.entity.id}}/thumbnail"/>'
+                    width: 50,
+                    cellTemplate: '<img width="50" src="r/animal/{{row.entity.id}}/photo_wh50"/>'
                 });
             }
 

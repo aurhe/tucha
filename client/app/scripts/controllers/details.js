@@ -77,7 +77,7 @@ angular.module('tucha')
                 var fd = new FormData();
                 fd.append('file', files[0]);
 
-                $http.post('/r/' + stateName + '/' + id + '/picture', fd, {
+                $http.post('/r/' + stateName + '/' + id + '/photo', fd, {
                     withCredentials: true,
                     headers: {'Content-Type': undefined},
                     transformRequest: angular.identity
