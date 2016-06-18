@@ -23,7 +23,7 @@ angular.module('tucha')
                     field: 'id',
                     name: '',
                     width: 50,
-                    cellTemplate: '<img width="50" src="r/animal/{{row.entity.id}}/photo_wh50"/>'
+                    cellTemplate: '<div class="grid-image-cell"><img width="50" src="r/animal/{{row.entity.id}}/photo_wh50"/></div>'
                 });
             }
 
@@ -39,6 +39,7 @@ angular.module('tucha')
                 enableVerticalScrollbar: 0,
                 enableGridMenu: true,
                 rowTemplate: 'views/directives/rowTemplate.html',
+                rowHeight: 30,
                 appScopeProvider: {
                     rowClick: function (row) {
                         $location.path('/' + stateName + '/' + row.entity.id);
