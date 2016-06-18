@@ -21,7 +21,7 @@ angular.module('tucha')
         species: {field: 'species', name: 'Espécie', width: 50},
         gender: {
             field: 'gender', name: 'Sexo', visible: false,
-            cellTemplate: '<span>{{row.entity.gender | tuchaBoolean:[\'Fêmea\', \'Macho\']}}</span>'
+            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.gender | tuchaBoolean:[\'Fêmea\', \'Macho\']}}</div>'
         },
         breed: {field: 'breed', name: 'Raça', visible: false},
         date_of_birth: {
@@ -37,7 +37,7 @@ angular.module('tucha')
             field: 'is_adoptable',
             name: 'Adoptável',
             width: 50,
-            cellTemplate: '<span>{{row.entity.is_adoptable | tuchaBoolean}}</span>'
+            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.is_adoptable | tuchaBoolean}}</div>'
         },
         is_adoptable_reason: {field: 'is_adoptable_reason', name: 'Motivo da não ser adoptável', visible: false},
         received_by: {field: 'received_by', name: 'Recebido por', visible: false},
@@ -48,14 +48,14 @@ angular.module('tucha')
             field: 'is_sterilizated',
             name: 'Esterilizado',
             width: 50,
-            cellTemplate: '<span>{{row.entity.is_sterilizated | tuchaBoolean}}</span>'
+            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.is_sterilizated | tuchaBoolean}}</div>'
         },
         sterilization_date: {field: 'sterilization_date', name: 'Data do Esterelizamento', visible: false},
         sterilization_by: {field: 'sterilization_by', name: 'Esterlizado por', visible: false},
         sterilization_details: {field: 'sterilization_details', name: 'Detalhes do Esterelizamento', visible: false},
         current_situation: {
             field: 'current_situation', name: 'Situação Actual', minWidth: 300,
-            cellTemplate: '<span>{{row.entity.current_situation | tuchaCurrentSituation}}</span>'
+            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.current_situation | tuchaCurrentSituation}}</div>'
         },
         missing_details: {field: 'missing_details', name: 'Detalhes do Desaparecimento', visible: false},
         death_date: {field: 'death_date', name: 'Data do Falecimento', visible: false},
