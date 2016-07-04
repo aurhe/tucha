@@ -243,7 +243,7 @@ var selects = {
         dropdown: 'select id, name from tucha.animal where is_deleted is null',
         adoptableAnimals: 'select id,name,gender from tucha.animal where is_adoptable=true and ' +
         '(current_situation="IN_SHELTER" or current_situation="FAT" or current_situation="FAR") and ' +
-        'picture_thumbnail is not null and is_deleted is null'
+        'is_deleted is null'
     },
     veterinary: {
         entity: 'veterinary',
