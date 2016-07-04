@@ -547,18 +547,18 @@ app.listen(config.nodePort, config.nodeIp);
 
 
 // function dbV1toV2convertion() {
-//     connection.query('select id, picture from tucha.animal', function (err, rows) {
-//         var i = 0;
-//         var intervalId = setInterval(function () {
-//             console.log(rows[i].id);
-//             if (rows[i].picture !== null) {
-//                 storeImage(rows[i].id, rows[i].picture);
+//     var i = 1;
+//     var intervalId = setInterval(function () {
+//         console.log(i);
+//         connection.query('select id, picture from tucha.animal where id=' + i, function (err, rows) {
+//             if (rows[0].picture !== null) {
+//                 storeImage(rows[0].id, rows[0].picture);
 //             }
-//             i++;
-//             if (i === rows.length) {
-//                 clearInterval(intervalId);
-//             }
-//         }, 1000);
-//     });
+//         });
+//         i++;
+//         if (i === 394) {
+//             clearInterval(intervalId);
+//         }
+//     }, 60000);
 // }
 // dbV1toV2convertion();
