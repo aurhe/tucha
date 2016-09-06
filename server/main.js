@@ -129,74 +129,76 @@ function logQueryError(err) {
 
 function storeImage(id, buffer, callback) {
 
-    connection.query('insert into tucha.photos set ?', {id: id}, function (err) {
-        if (err) {
-            console.log(err);
-            return;
-        }
-
-        new jimp(buffer, function (err, image) {
-            var ratio, pw, ph,
-                w = image.bitmap.width,
-                h = image.bitmap.height;
-
-            if (w > h) {
-                ratio = 800 / w;
-            } else {
-                ratio = 800 / h;
+    connection.query('delete from tucha.photos where id=' + id, function () {
+        connection.query('insert into tucha.photos set ?', {id: id}, function (err) {
+            if (err) {
+                console.log(err);
+                return;
             }
-            pw = w * ratio;
-            ph = h * ratio;
-            image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
-                var sql = 'update tucha.photos set photo=? where id=' + id;
-                sql = mysql.format(sql, [resizedBuffer]);
-                connection.query(sql, logQueryError);
-            });
 
-            ratio = 500 / h;
-            pw = w * ratio;
-            ph = h * ratio;
-            image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
-                var sql = 'update tucha.photos set photo_h500=? where id=' + id;
-                sql = mysql.format(sql, [resizedBuffer]);
-                connection.query(sql, logQueryError);
-            });
+            new jimp(buffer, function (err, image) {
+                var ratio, pw, ph,
+                    w = image.bitmap.width,
+                    h = image.bitmap.height;
 
-            ratio = 250 / w;
-            pw = w * ratio;
-            ph = h * ratio;
-            image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
-                var sql = 'update tucha.photos set photo_w250=? where id=' + id;
-                sql = mysql.format(sql, [resizedBuffer]);
-                connection.query(sql, logQueryError);
-            });
+                if (w > h) {
+                    ratio = 800 / w;
+                } else {
+                    ratio = 800 / h;
+                }
+                pw = w * ratio;
+                ph = h * ratio;
+                image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
+                    var sql = 'update tucha.photos set photo=? where id=' + id;
+                    sql = mysql.format(sql, [resizedBuffer]);
+                    connection.query(sql, logQueryError);
+                });
 
-            ratio = 100 / h;
-            pw = w * ratio;
-            ph = h * ratio;
-            image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
-                var sql = 'update tucha.photos set photo_h100=? where id=' + id;
-                sql = mysql.format(sql, [resizedBuffer]);
-                connection.query(sql, logQueryError);
-            });
+                ratio = 500 / h;
+                pw = w * ratio;
+                ph = h * ratio;
+                image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
+                    var sql = 'update tucha.photos set photo_h500=? where id=' + id;
+                    sql = mysql.format(sql, [resizedBuffer]);
+                    connection.query(sql, logQueryError);
+                });
 
-            if (w > h) {
-                ratio = 50 / w;
-            } else {
-                ratio = 50 / h;
-            }
-            pw = w * ratio;
-            ph = h * ratio;
-            image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
-                var sql = 'update tucha.photos set photo_wh50=? where id=' + id;
-                sql = mysql.format(sql, [resizedBuffer]);
-                connection.query(sql, logQueryError);
+                ratio = 250 / w;
+                pw = w * ratio;
+                ph = h * ratio;
+                image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
+                    var sql = 'update tucha.photos set photo_w250=? where id=' + id;
+                    sql = mysql.format(sql, [resizedBuffer]);
+                    connection.query(sql, logQueryError);
+                });
 
-                connection.query(sql, function (err) {
-                    logQueryError(err);
-                    if (typeof callback !== 'undefined') {
-                        callback();
-                    }
+                ratio = 100 / h;
+                pw = w * ratio;
+                ph = h * ratio;
+                image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
+                    var sql = 'update tucha.photos set photo_h100=? where id=' + id;
+                    sql = mysql.format(sql, [resizedBuffer]);
+                    connection.query(sql, logQueryError);
+                });
+
+                if (w > h) {
+                    ratio = 50 / w;
+                } else {
+                    ratio = 50 / h;
+                }
+                pw = w * ratio;
+                ph = h * ratio;
+                image.resize(pw, ph).getBuffer(jimp.MIME_JPEG, function (err, resizedBuffer) {
+                    var sql = 'update tucha.photos set photo_wh50=? where id=' + id;
+                    sql = mysql.format(sql, [resizedBuffer]);
+                    connection.query(sql, logQueryError);
+
+                    connection.query(sql, function (err) {
+                        logQueryError(err);
+                        if (typeof callback !== 'undefined') {
+                            callback();
+                        }
+                    });
                 });
             });
         });
