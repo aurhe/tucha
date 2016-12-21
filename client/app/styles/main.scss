@@ -152,6 +152,12 @@ body {
         .ui-grid-row {
             cursor: pointer;
 
+            .ui-grid-cell {
+                padding-top: 0;
+                padding-bottom: 0;
+                line-height: 50px;
+            }
+
             :hover .ui-grid-cell {
                 background-color: #73BCF7;
             }
@@ -162,7 +168,6 @@ body {
 
             img {
                 width: auto;
-                height: 30px;
             }
         }
     }

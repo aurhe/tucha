@@ -18,25 +18,26 @@ angular.module('tucha')
             }
         },
         name: {field: 'name', name: 'Nome', minWidth: 100},
-        species: {field: 'species', name: 'Espécie', width: 50},
-        gender: {
-            field: 'gender', name: 'Sexo', visible: false,
-            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.gender | tuchaBoolean:[\'Fêmea\', \'Macho\']}}</div>'
-        },
+        species: {field: 'species', name: 'Espécie', width: 80, visible: false},
         breed: {field: 'breed', name: 'Raça', visible: false},
         date_of_birth: {
             field: 'date_of_birth',
             name: 'Idade',
-            width: 50,
+            width: 80,
             cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.date_of_birth | tuchaAge}}</div>'
+        },
+        gender: {
+            field: 'gender', name: 'Sexo', width: 80,
+            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.gender | tuchaBoolean:[\'Fêmea\', \'Macho\']}}</div>'
         },
         size: {field: 'size', name: 'Tamanho', visible: false},
         color: {field: 'color', name: 'Cor', visible: false},
-        details: {field: 'details', name: 'Detalhes'},
+        details: {field: 'details', name: 'Detalhes', visible: false},
         is_adoptable: {
             field: 'is_adoptable',
             name: 'Adoptável',
-            width: 50,
+            width: 100,
+            visible: false,
             cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.is_adoptable | tuchaBoolean}}</div>'
         },
         is_adoptable_reason: {field: 'is_adoptable_reason', name: 'Motivo da não ser adoptável', visible: false},
@@ -47,7 +48,7 @@ angular.module('tucha')
         is_sterilizated: {
             field: 'is_sterilizated',
             name: 'Esterilizado',
-            width: 50,
+            width: 110,
             cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.is_sterilizated | tuchaBoolean}}</div>'
         },
         sterilization_date: {field: 'sterilization_date', name: 'Data do Esterelizamento', visible: false},
