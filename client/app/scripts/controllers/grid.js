@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tucha')
-    .controller('GridCtrl', function ($scope, $location, $http, $timeout, states, columns) {
+    .controller('GridCtrl', function ($rootScope, $scope, $location, $http, $timeout, states, columns) {
         var stateName = $location.path().split('/')[1];
 
         for (var i = 0; i < states.length; i++) {
@@ -40,8 +40,23 @@ angular.module('tucha')
                 enableGridMenu: true,
                 rowTemplate: 'views/directives/rowTemplate.html',
                 rowHeight: 30,
+                onRegisterApi: function (gridApi) {
+                    $scope.gridApi = gridApi;
+                },
                 appScopeProvider: {
                     rowClick: function (row) {
+
+                        if (stateName === 'animal') {
+                            // generate current sort ids for the next and previous button to work
+                            $rootScope.animalsSequence = [];
+
+                            var rows = $scope.gridApi.core.getVisibleRows();
+
+                            for (var i = 0; i < rows.length; i++) {
+                                $rootScope.animalsSequence.push(rows[i].entity.id);
+                            }
+                        }
+
                         $location.path('/' + stateName + '/' + row.entity.id);
                     }
                 }

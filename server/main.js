@@ -7,7 +7,7 @@ var config = {
     dbHost: '127.0.0.1',
     dbPort: '3306',
     dbUser: 'root',
-    dbPassword: '',
+    dbPassword: 'root',
     sessionSecret: 'sessionSecret'
 };
 
@@ -245,7 +245,8 @@ var selects = {
         dropdown: 'select id, name from tucha.animal where is_deleted is null',
         adoptableAnimals: 'select id,name,gender from tucha.animal where is_adoptable=true and ' +
         '(current_situation="IN_SHELTER" or current_situation="FAT" or current_situation="FAR") and ' +
-        'is_deleted is null'
+        'is_deleted is null',
+        sequence: 'select a.id from tucha.animal a where a.is_deleted is null'
     },
     veterinary: {
         entity: 'veterinary',
@@ -418,6 +419,22 @@ app.get('/r/:entity', auth, function (req, res) {
 // get dropdown data
 app.get('/r/dropdown/:entity', auth, function (req, res) {
     query(selects[req.params.entity].dropdown, res);
+});
+
+// get animals id sequence for the next and previous button
+app.get('/r/animal/sequence', function (req, res) {
+    console.log(selects.animal.sequence);
+    connection.query(selects.animal.sequence, function (err, rows) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        var ids = [];
+        for (var i = 0; i < rows.length; i++) {
+            ids.push(rows[i].id);
+        }
+        res.json(ids);
+    });
 });
 
 // get animal details, no auth used to work in deck list
