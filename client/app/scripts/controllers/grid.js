@@ -39,7 +39,7 @@ angular.module('tucha')
                 enableVerticalScrollbar: 0,
                 enableGridMenu: true,
                 rowTemplate: 'views/directives/rowTemplate.html',
-                rowHeight: 30,
+                rowHeight: 50,
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
                 },
