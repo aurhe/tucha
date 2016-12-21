@@ -6,7 +6,7 @@ Still a work in progress.
 
 ## Build instructions
 
-Requires [Node.js](http://nodejs.org/), [Grunt](http://gruntjs.com/) and [MySQL](https://www.mysql.com/).
+Requires [Node.js](http://nodejs.org/), [Grunt](http://gruntjs.com/), [Compass](http://compass-style.org/install/) and [MySQL](https://www.mysql.com/).
 
 Load the database/script.sql to a MySQL database and configure server/main.js to connect to it.
 
