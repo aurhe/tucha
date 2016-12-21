@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tucha')
-    .controller('DetailsCtrl', function ($scope, $location, $routeParams, $http, $timeout, states) {
+    .controller('DetailsCtrl', function ($rootScope, $scope, $location, $routeParams, $http, $timeout, states) {
         var previousDetails;
         var stateName = $location.path().split('/')[1];
 
@@ -62,6 +62,33 @@ angular.module('tucha')
                 $timeout(function () {
                     angular.element.find('#state_' + $index)[0].focus();
                 });
+            };
+
+            if($rootScope.animalsSequence === undefined) {
+                // if no sequence was obtained from the grid, fetch the default from the server
+                $http.get('/r/animal/sequence').then(function (data) {
+                    $rootScope.animalsSequence = data.data;
+                });
+            }
+
+            $scope.next = function () {
+                var id = parseInt($scope.entityId, 10);
+                for (var i = 0; i < $rootScope.animalsSequence.length; i++) {
+                    if ($rootScope.animalsSequence[i] === id) {
+                        $location.path('/animal/' + $rootScope.animalsSequence[i + 1]);
+                        break;
+                    }
+                }
+            };
+
+            $scope.previous = function () {
+                var id = parseInt($scope.entityId, 10);
+                for (var i = 0; i < $rootScope.animalsSequence.length; i++) {
+                    if ($rootScope.animalsSequence[i] === id) {
+                        $location.path('/animal/' + $rootScope.animalsSequence[i - 1]);
+                        break;
+                    }
+                }
             };
         }
 
