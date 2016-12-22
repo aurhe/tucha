@@ -204,9 +204,15 @@ body {
         text-align: center;
 
         .animal-photo {
-            display:inline-block;
-            width:50%;
+            display: inline-block;
+            width: 50%;
         }
+    }
+
+    .associates_border_box {
+        border: 1px solid #eeeeee;
+        margin: 10px 0;
+        padding: 10px;
     }
 
 }

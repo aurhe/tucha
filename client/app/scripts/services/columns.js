@@ -89,8 +89,23 @@ angular.module('tucha')
         city: {field: 'city', name: 'Localidade', visible: false},
         phone: {field: 'phone', name: 'Telefone'},
         email: {field: 'email', name: 'Email'},
-        new_adoption_allowed: {field: 'new_adoption_allowed', name: 'Nova Adopção Permitida'},
-        can_host: {field: 'can_host', name: 'Pode Acolher'},
+        volunteer: {
+            field: 'volunteer', name: 'Voluntário', visible: false,
+            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.volunteer | tuchaBoolean}}</div>'
+        },
+        associate: {
+            field: 'associate', name: 'Sócio', visible: false,
+            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.associate | tuchaBoolean}}</div>'
+        },
+        last_paid_fee: {field: 'last_paid_fee', name: 'Última cota paga', visible: false},
+        new_adoption_allowed: {
+            field: 'new_adoption_allowed', name: 'Nova Adopção Permitida',
+            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.new_adoption_allowed | tuchaBoolean}}</div>'
+        },
+        can_host: {
+            field: 'can_host', name: 'Pode Acolher',
+            cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.can_host | tuchaBoolean}}</div>'
+        },
         host_capacity: {field: 'host_capacity', name: 'Capacidade de Acolhimento'},
         host_details: {field: 'host_details', name: 'Detalhes', visible: false},
         host_species: {field: 'host_species', name: 'Que tipos de Animais Acolhe', visible: false},

@@ -9,7 +9,8 @@ angular.module('tucha')
                 model: '=',
                 editable: '=',
                 label: '@',
-                name: '@'
+                name: '@',
+                number: '@'
             },
             link: function postLink() {//scope, element, attrs) {
             }

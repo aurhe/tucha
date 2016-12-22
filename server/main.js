@@ -255,9 +255,19 @@ var selects = {
     },
     person: {
         entity: 'person',
-        details: 'select id, name, address, city, phone, email, new_adoption_allowed, details, can_host, host_capacity, ' +
-        'host_species, host_details from tucha.person where is_deleted is null',
+        details: 'select id, name, address, city, phone, email, volunteer, associate, last_paid_fee, new_adoption_allowed,' +
+        ' details, can_host, host_capacity, host_species, host_details from tucha.person where is_deleted is null',
         dropdown: 'select id, name from tucha.person where is_deleted is null'
+    },
+    volunteer: {
+        entity: 'volunteer',
+        details: 'select id, name, address, city, phone, email, associate, last_paid_fee, new_adoption_allowed,' +
+        ' details, can_host, host_capacity, host_species, host_details from tucha.person where volunteer=true and is_deleted is null',
+    },
+    associate: {
+        entity: 'associate',
+        details: 'select id, name, address, city, phone, email, volunteer, last_paid_fee, new_adoption_allowed,' +
+        ' details, can_host, host_capacity, host_species, host_details from tucha.person where associate=true and is_deleted is null',
     },
     user: {
         entity: 'user',
@@ -382,13 +392,6 @@ var selects = {
         ' left join tucha.medicament me on me.id = ms.medicament' +
         ' where ms.is_deleted is null'
     },
-    volunteer: {
-        entity: 'volunteer',
-        details: 'select id, person, disponibility, activities, expertises, connections ' +
-        'from tucha.volunteer where is_deleted is null',
-        grid: 'select v.id, p.name as person, v.disponibility, v.activities, v.expertises, v.connections ' +
-        'from tucha.volunteer v left join tucha.person p on p.id = v.person where v.is_deleted is null'
-    },
     host: {
         entity: 'host',
         details: 'select id, animal, person, start_date, end_date, details from tucha.host where is_deleted is null',
@@ -466,6 +469,10 @@ app.get('/r/:entity/:id', auth, function (req, res) {
 // save details
 app.post('/r/:entity/:id', auth, function (req, res) {
     var sql, entity = selects[req.params.entity].entity, data = req.body, states = null;
+
+    if (entity === 'volunteer' || entity === 'associate') {
+        entity = 'person';
+    }
 
     if (req.params.id === 'new') {
         sql = 'insert into tucha.' + entity + ' set ?';

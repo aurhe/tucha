@@ -6,6 +6,7 @@ angular.module('tucha')
         {name: 'adoption', title: 'Adopções', icon: 'glyphicon-heart'},
         {name: 'person', title: 'Pessoas', icon: 'glyphicon-user'},
         {name: 'volunteer', title: 'Voluntários', icon: 'glyphicon-user'},
+        {name: 'associate', title: 'Sócios', icon: 'glyphicon-user'},
         {name: 'aggressivityReport', title: 'Relatórios Agressividade', icon: 'glyphicon-alert'},
         {name: 'escapeReport', title: 'Relatórios de Fuga', icon: 'glyphicon-sunglasses'},
         {name: 'donation', title: 'Doações', icon: 'glyphicon-thumbs-up'},
