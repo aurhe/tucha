@@ -1,5 +1,12 @@
 <h1 class="page-header"><span class="glyphicon {{state.icon}}"></span>{{title}}</h1>
 <p class="clearfix">
-    <button ng-click="add()" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
+    <button ng-click="add()" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar
+    </button>
 </p>
+<div class="associates_border_box" ng-if="state.name === 'associate' && feesDueList.length > 0">
+    <p><strong>Sócios com cotas em atraso para {{currentYear}}:</strong></p>
+    <p><strong>Nomes:</strong> <span ng-repeat="associate in feesDueList">{{associate.name}}; </span></p>
+    <p><strong>Emails:</strong> <span ng-repeat="associate in feesDueList">{{associate.email}}; </span></p>
+    <p><strong>Telemóveis:</strong> <span ng-repeat="associate in feesDueList">{{associate.phone}}; </span></p>
+</div>
 <div ng-if="gridOptions" ui-grid="gridOptions" class="grid"></div>

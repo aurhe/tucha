@@ -3,6 +3,10 @@
 <tucha-text label="Cidade" editable="editable" model="details" name="city"></tucha-text>
 <tucha-text label="Telefone" editable="editable" model="details" name="phone"></tucha-text>
 <tucha-text label="Email" editable="editable" model="details" name="email"></tucha-text>
+<tucha-boolean label="Voluntário" editable="editable" model="details" name="volunteer"></tucha-boolean>
+<tucha-boolean label="Sócio" editable="editable" model="details" name="associate"></tucha-boolean>
+<tucha-text ng-if="details.associate == 1" label="Ano da última cota paga" editable="editable" model="details"
+            name="last_paid_fee" number="true"></tucha-text>
 <tucha-boolean label="Nova adopção permitida" editable="editable" model="details"
                name="new_adoption_allowed"></tucha-boolean>
 <tucha-details label="Detalhes" editable="editable" model="details" name="details"></tucha-details>

@@ -25,6 +25,15 @@ angular.module('tucha')
                     width: 50,
                     cellTemplate: '<div class="grid-image-cell"><img width="50" src="r/animal/{{row.entity.id}}/photo_wh50"/></div>'
                 });
+            } else if (stateName === 'associate') {
+                $scope.feesDueList = [];
+                $scope.currentYear = new Date().getFullYear();
+
+                for (var i = 0; i < data.data.length; i++) {
+                    if (!data.data[i].last_paid_fee || data.data[i].last_paid_fee < $scope.currentYear) {
+                        $scope.feesDueList.push(data.data[i]);
+                    }
+                }
             }
 
             for (var key in data.data[0]) {
@@ -55,6 +64,9 @@ angular.module('tucha')
                             for (var i = 0; i < rows.length; i++) {
                                 $rootScope.animalsSequence.push(rows[i].entity.id);
                             }
+                        } else if (stateName === 'volunteer' || stateName === 'associate') {
+                            // theese 2 sections are only shortcuts to persons with different filtered lists
+                            stateName = 'person';
                         }
 
                         $location.path('/' + stateName + '/' + row.entity.id);
