@@ -152,9 +152,8 @@ body {
         .ui-grid-row {
             cursor: pointer;
 
-            .ui-grid-cell {
-                padding-top: 0;
-                padding-bottom: 0;
+            .ui-grid-cell-contents {
+                padding: 0 5px;
                 line-height: 50px;
             }
 
