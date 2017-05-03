@@ -120,8 +120,35 @@ angular.module('tucha')
             previousDetails = angular.copy($scope.details);
             $scope.editable = true;
         };
+
+        function toYMD(date) {
+            if(date !== undefined && date !== null) {
+                var month =  date.getMonth() + 1,
+                    day = date.getDate();
+                return date.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+            } else {
+                return date;
+            }
+        }
+
         $scope.submit = function () {
-            $http.post('/r/' + stateName + '/' + $scope.entityId, $scope.details).then(function (result) {
+
+            var details = angular.copy($scope.details);
+
+            // remove time from dates before sending to the server
+            details.date_of_birth = toYMD(details.date_of_birth);
+            details.received_date = toYMD(details.received_date);
+            details.death_date = toYMD(details.death_date);
+            details.date = toYMD(details.date);
+            details.returned_date = toYMD(details.returned_date);
+            details.start_date = toYMD(details.start_date);
+            details.end_date = toYMD(details.end_date);
+            details.opening_date = toYMD(details.opening_date);
+            details.expiration_date = toYMD(details.expiration_date);
+            details.acquired_date = toYMD(details.acquired_date);
+            details.sterilization_date = toYMD(details.sterilization_date);
+
+            $http.post('/r/' + stateName + '/' + $scope.entityId, details).then(function (result) {
                 if (stateName === 'animal' && $scope.entityId === 'new') {
                     var files = angular.element('input[type=file]')[0].files;
 
