@@ -269,6 +269,11 @@ var selects = {
         details: 'select id, name, address, city, phone, email, volunteer, last_paid_fee, new_adoption_allowed,' +
         ' details, can_host, host_capacity, host_species, host_details from tucha.person where associate=true and is_deleted is null',
     },
+    can_host: {
+        entity: 'host',
+        details: 'select id, name, address, city, phone, email, volunteer, last_paid_fee, new_adoption_allowed,' +
+        ' details, host_capacity, host_species, host_details from tucha.person where can_host=true and is_deleted is null',
+    },
     user: {
         entity: 'user',
         details: 'select username, role, person from tucha.user where is_deleted is null',
