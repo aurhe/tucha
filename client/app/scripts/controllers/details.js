@@ -121,13 +121,14 @@ angular.module('tucha')
             $scope.editable = true;
         };
 
-        function toYMD(date) {
-            if(date !== undefined && date !== null) {
-                var month =  date.getMonth() + 1,
+        function toYMD(dateString) {
+            if(dateString !== undefined && dateString !== null) {
+                var date = new Date(dateString),
+                    month =  date.getMonth() + 1,
                     day = date.getDate();
                 return date.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
             } else {
-                return date;
+                return dateString;
             }
         }
 
